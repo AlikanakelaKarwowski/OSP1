@@ -33,6 +33,7 @@ void main()
   makeInterrupt21();
   printLogo();
   printString("Hello world from Chayton, Dominic, and Alex.\r\n\0",1);
+  clearScreen();
   while(1);
 }
 
@@ -65,7 +66,7 @@ void printLogo()
 void clearScreen()
 {
   int i = 0;
-  while(i <=24)
+  while(i <=12)
   {
     printString("\r");
     printString("\n");

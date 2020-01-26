@@ -33,21 +33,30 @@ void main()
 {
   makeInterrupt21();
   printLogo();
-  clearScreen();
   printString("Hello world from Chayton, Dominic, and Alex.\r\n\0",1);
   while(1);
 }
 
 void printString(char* c, int d)
 {
-  while(*c != '\0')
-  {
-    char al = *c;
-    char ah = 14;
-    int ax = ah * 256 + al;
-    interrupt(16, ax, 0, 0, 0);
-    c++;
-  }
+  if(d ==1)
+    while(*c != '\0')
+    {
+      char al = *c;
+      char ah = 14;
+      int ax = ah * 256 + al;
+      interrupt(23, ax, 0, 0, 0);
+      c++;
+    }
+  else
+    while(*c != '\0')
+    {
+      char al = *c;
+      char ah = 14;
+      int ax = ah * 256 + al;
+      interrupt(16, ax, 0, 0, 0);
+      c++;
+    }
   /* fill this in */
   return;
 }
@@ -67,7 +76,7 @@ void printLogo()
 void clearScreen()
 {
   int i = 0;
-  while(i <=12)
+  while(i <=24)
   {
     printString("\r");
     printString("\n");

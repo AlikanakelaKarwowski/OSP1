@@ -32,7 +32,7 @@ void main()
 {
   makeInterrupt21();
   printLogo();
-  printString("Hello world from your name.\r\n\0",1);
+  printString("Hello world from Chayton, Dominic, and Alex.\r\n\0",1);
   while(1);
 }
 

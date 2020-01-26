@@ -67,7 +67,7 @@ void printLogo()
 void clearScreen()
 {
   int i = 0;
-  while(i <=12)
+  while(i <=24)
   {
     printString("\r");
     printString("\n");

@@ -30,30 +30,48 @@ void printLogo();
 
 void main()
 {
-   makeInterrupt21();
-   printLogo();
-   printString("Hello world from your name.\r\n\0",1);
-   while(1);
+  makeInterrupt21();
+  printLogo();
+  printString("Hello world from your name.\r\n\0",1);
+  while(1);
 }
 
 void printString(char* c, int d)
 {
-   /* fill this in */
-   return;
+  while(*c != '\0')
+  {
+    char al = *c;
+    char ah = 14;
+    int ax = ah * 256 + al;
+    interrupt(16, ax, 0, 0, 0);
+    c++;
+  }
+  /* fill this in */
+  return;
 }
 
 void printLogo()
 {
-   printString("       ___   `._   ____  _            _    _____   ____   _____ \r\n\0",0);
-   printString("      /   \\__/__> |  _ \\| |          | |  |  __ \\ / __ \\ / ____|\r\n\0",0);
-   printString("     /_  \\  _/    | |_) | | __ _  ___| | _| |  | | |  | | (___ \r\n\0",0);
-   printString("    // \\ /./      |  _ <| |/ _` |/ __| |/ / |  | | |  | |\\___ \\ \r\n\0",0);
-   printString("   //   \\\\        | |_) | | (_| | (__|   <| |__| | |__| |____) |\r\n\0",0);
-   printString("._/'     `\\.      |____/|_|\\__,_|\\___|_|\\_\\_____/ \\____/|_____/\r\n\0",0);
-   printString(" BlackDOS2020 v. 1.03, c. 2019. Based on a project by M. Black. \r\n\0",0);
-   printString(" Author(s): your name(s) here.\r\n\r\n\0",0);
+  printString("       ___   `._   ____  _            _    _____   ____   _____ \r\n\0",0);
+  printString("      /   \\__/__> |  _ \\| |          | |  |  __ \\ / __ \\ / ____|\r\n\0",0);
+  printString("     /_  \\  _/    | |_) | | __ _  ___| | _| |  | | |  | | (___ \r\n\0",0);
+  printString("    // \\ /./      |  _ <| |/ _` |/ __| |/ / |  | | |  | |\\___ \\ \r\n\0",0);
+  printString("   //   \\\\        | |_) | | (_| | (__|   <| |__| | |__| |____) |\r\n\0",0);
+  printString("._/'     `\\.      |____/|_|\\__,_|\\___|_|\\_\\_____/ \\____/|_____/\r\n\0",0);
+  printString(" BlackDOS2020 v. 1.03, c. 2019. Based on a project by M. Black. \r\n\0",0);
+  printString(" Author(s): your name(s) here.\r\n\r\n\0",0);
 }
 
+void clearScreen()
+{
+  int i = 0;
+  while(i <=24)
+  {
+    printString("\r");
+    printString("\n");
+    ++i;
+  }
+}
 /* MAKE FUTURE UPDATES HERE */
 /* VVVVVVVVVVVVVVVVVVVVVVVV */
 

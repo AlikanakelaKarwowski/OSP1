@@ -102,7 +102,7 @@ void handleInterrupt21(int ax, int bx, int cx, int dx)
   /*      case 6: case 7: case 8: case 9: case 10: */
   /*      case 11: case 12: case 13: case 14: case 15: */
     default:
-      printString("General BlackDOS error.\r\n\0",0);
+      interrupt(33,0,"General BlackDOS error.\r\n\0",0,0);
       break;
   }
 }

@@ -26,14 +26,13 @@
 
 void handleInterrupt21(int,int,int,int);
 void printString(char*,int);
-void printLogo();
 void clearScreen();
 
 void main()
 {
   makeInterrupt21();
   printLogo();
-  printString("Hello world from Chayton, Dominic, and Alex.\r\n\0",1);
+  interrupt(33,0,"Hello world from Chayton, Dominic, and Alex.\r\n\0",1,0);
   while(1);
 }
 
@@ -63,14 +62,14 @@ void printString(char* c, int d)
 
 void printLogo()
 {
-  printString("       ___   `._   ____  _            _    _____   ____   _____ \r\n\0",0);
-  printString("      /   \\__/__> |  _ \\| |          | |  |  __ \\ / __ \\ / ____|\r\n\0",0);
-  printString("     /_  \\  _/    | |_) | | __ _  ___| | _| |  | | |  | | (___ \r\n\0",0);
-  printString("    // \\ /./      |  _ <| |/ _` |/ __| |/ / |  | | |  | |\\___ \\ \r\n\0",0);
-  printString("   //   \\\\        | |_) | | (_| | (__|   <| |__| | |__| |____) |\r\n\0",0);
-  printString("._/'     `\\.      |____/|_|\\__,_|\\___|_|\\_\\_____/ \\____/|_____/\r\n\0",0);
-  printString(" BlackDOS2020 v. 1.03, c. 2019. Based on a project by M. Black. \r\n\0",0);
-  printString(" Author(s): your name(s) here.\r\n\r\n\0",0);
+  interrupt(33,0,"       ___   `._   ____  _            _    _____   ____   _____ \r\n\0",0,0);
+  interrupt(33,0,"      /   \\__/__> |  _ \\| |          | |  |  __ \\ / __ \\ / ____|\r\n\0",0,0);
+  interrupt(33,0,"     /_  \\  _/    | |_) | | __ _  ___| | _| |  | | |  | | (___ \r\n\0",0,0);
+  interrupt(33,0,"    // \\ /./      |  _ <| |/ _` |/ __| |/ / |  | | |  | |\\___ \\ \r\n\0",0,0);
+  interrupt(33,0,"   //   \\\\        | |_) | | (_| | (__|   <| |__| | |__| |____) |\r\n\0",0,0);
+  interrupt(33,0,"._/'     `\\.      |____/|_|\\__,_|\\___|_|\\_\\_____/ \\____/|_____/\r\n\0",0,0);
+  interrupt(33,0," BlackDOS2020 v. 1.03, c. 2019. Based on a project by M. Black. \r\n\0",0,0);
+  interrupt(33,0," Author(s): your name(s) here.\r\n\r\n\0",0);
 }
 
 void clearScreen()
@@ -78,8 +77,8 @@ void clearScreen()
   int i = 0;
   while(i <=24)
   {
-    printString("\r");
-    printString("\n");
+    interrupt(33,0,"\r",0,0);
+    interrupt(33,0,"\n",0,0);
     ++i;
   }
 }
@@ -93,12 +92,13 @@ void clearScreen()
 
 void handleInterrupt21(int ax, int bx, int cx, int dx)
 {
-   return;
-/*   switch(ax) {  */
-/*      case 0:  */
-/*      case 1: case 2: case 3: case 4: case 5: */
-/*      case 6: case 7: case 8: case 9: case 10: */
-/*      case 11: case 12: case 13: case 14: case 15: */
-/*      default: printString("General BlackDOS error.\r\n\0"); */
-/*   }  */
+  /* return;  */
+  switch(ax)
+  {
+    case 0:  printString(bx, cx);
+  /*      case 1: case 2: case 3: case 4: case 5: */
+  /*      case 6: case 7: case 8: case 9: case 10: */
+  /*      case 11: case 12: case 13: case 14: case 15: */
+    default: printString("General BlackDOS error.\r\n\0");
+  }
 }

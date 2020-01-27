@@ -32,7 +32,7 @@ void main()
 {
   makeInterrupt21();
   printLogo();
-  interrupt(33,0,"Hello world from Chayton, Dominic, and Alex.\r\n\0",1);
+  interrupt(33,0,"Hello world from Chayton, Dominic, and Alex.\r\n\0",1,0);
   while(1);
 }
 
@@ -62,14 +62,14 @@ void printString(char* c, int d)
 
 void printLogo()
 {
-  interrupt(33,0,"       ___   `._   ____  _            _    _____   ____   _____ \r\n\0",0);
-  interrupt(33,0,"      /   \\__/__> |  _ \\| |          | |  |  __ \\ / __ \\ / ____|\r\n\0",0);
-  interrupt(33,0,"     /_  \\  _/    | |_) | | __ _  ___| | _| |  | | |  | | (___ \r\n\0",0);
-  interrupt(33,0,"    // \\ /./      |  _ <| |/ _` |/ __| |/ / |  | | |  | |\\___ \\ \r\n\0",0);
-  interrupt(33,0,"   //   \\\\        | |_) | | (_| | (__|   <| |__| | |__| |____) |\r\n\0",0);
-  interrupt(33,0,"._/'     `\\.      |____/|_|\\__,_|\\___|_|\\_\\_____/ \\____/|_____/\r\n\0",0);
-  interrupt(33,0," BlackDOS2020 v. 1.03, c. 2019. Based on a project by M. Black. \r\n\0",0);
-  interrupt(33,0," Author(s): your name(s) here.\r\n\r\n\0",0);
+  interrupt(33,0,"       ___   `._   ____  _            _    _____   ____   _____ \r\n\0",0,0);
+  interrupt(33,0,"      /   \\__/__> |  _ \\| |          | |  |  __ \\ / __ \\ / ____|\r\n\0",0,0);
+  interrupt(33,0,"     /_  \\  _/    | |_) | | __ _  ___| | _| |  | | |  | | (___ \r\n\0",0,0);
+  interrupt(33,0,"    // \\ /./      |  _ <| |/ _` |/ __| |/ / |  | | |  | |\\___ \\ \r\n\0",0,0);
+  interrupt(33,0,"   //   \\\\        | |_) | | (_| | (__|   <| |__| | |__| |____) |\r\n\0",0,0);
+  interrupt(33,0,"._/'     `\\.      |____/|_|\\__,_|\\___|_|\\_\\_____/ \\____/|_____/\r\n\0",0,0);
+  interrupt(33,0," BlackDOS2020 v. 1.03, c. 2019. Based on a project by M. Black. \r\n\0",0,0);
+  interrupt(33,0," Author(s): your name(s) here.\r\n\r\n\0",0,0);
 }
 
 void clearScreen()
@@ -77,8 +77,8 @@ void clearScreen()
   int i = 0;
   while(i <=24)
   {
-    interrupt(33,0,"\r",0);
-    interrupt(33,0,"\n",0);
+    interrupt(33,0,"\r",0,0);
+    interrupt(33,0,"\n",0,0);
     ++i;
   }
 }
@@ -99,6 +99,6 @@ void handleInterrupt21(int ax, int bx, int cx, int dx)
   /*      case 1: case 2: case 3: case 4: case 5: */
   /*      case 6: case 7: case 8: case 9: case 10: */
   /*      case 11: case 12: case 13: case 14: case 15: */
-    default: interrupt(33,0,"General BlackDOS error.\r\n\0",0);
+    default: interrupt(33,0,"General BlackDOS error.\r\n\0",0,0);
   }
 }

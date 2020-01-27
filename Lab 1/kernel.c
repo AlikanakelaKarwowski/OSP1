@@ -95,10 +95,14 @@ void handleInterrupt21(int ax, int bx, int cx, int dx)
   /* return;  */
   switch(ax)
   {
-    case 0:  printString(bx, cx);
+    case 0:
+      printString(bx, cx);
+      break;
   /*      case 1: case 2: case 3: case 4: case 5: */
   /*      case 6: case 7: case 8: case 9: case 10: */
   /*      case 11: case 12: case 13: case 14: case 15: */
-    default: printString("General BlackDOS error.\r\n\0",0);
+    default:
+      printString("General BlackDOS error.\r\n\0",0);
+      break;
   }
 }

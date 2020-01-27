@@ -25,7 +25,11 @@
 /* 3460:4/526 BlackDOS2020 kernel, Version 1.03, Fall 2019.               */
 
 void handleInterrupt21(int,int,int,int);
+<<<<<<< HEAD
 void printLogo();
+=======
+void printString(char*,int);
+>>>>>>> 9d77cb5ec011f4ab27506827894bb224bc80ef8a
 void clearScreen();
 
 void main()

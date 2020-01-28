@@ -41,10 +41,7 @@ void printString(char* c, int d)
   if(d ==1)
     while(*c != '\0')
     {
-      char al = *c;
-      char ah = 14;
-      int ax = ah * 256 + al;
-      interrupt(23, ax, 0, 0, 0);
+      interrupt(23, *c, 0, 0, 0);
       c++;
     }
   else

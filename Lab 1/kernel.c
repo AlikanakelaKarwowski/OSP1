@@ -19,7 +19,7 @@
 /*                                                                        */
 /*                                                                        */
 /*                                                                        */
-/* Signed:Alex Karwowski, Chayton Hamerick, Dominic *** Date: 1/27/20     */
+/* Signed:Alex Karwowski, Chayton Hamerick, Dominic Cumba Date: 1/27/20   */
 /*                                                                        */
 /*                                                                        */
 /* 3460:4/526 BlackDOS2020 kernel, Version 1.03, Fall 2019.               */

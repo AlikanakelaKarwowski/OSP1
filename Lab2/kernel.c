@@ -33,7 +33,7 @@ void main()
   makeInterrupt21();
   printLogo();
   interrupt(33,0,"Hello world from Chayton, Dominic, and Alex. Please enter a name.\r\n\0",1,0);
-  char c[80]=readString()
+  /*char c[80]=readString()*/
   while(1);
 }
 

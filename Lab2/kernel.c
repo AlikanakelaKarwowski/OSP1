@@ -27,12 +27,13 @@
 void handleInterrupt21(int,int,int,int);
 void printLogo();
 void clearScreen();
-//
+void readString();
 void main()
 {
   makeInterrupt21();
   printLogo();
-  interrupt(33,0,"Hello world from Chayton, Dominic, and Alex.\r\n\0",1,0);
+  interrupt(33,0,"Hello world from Chayton, Dominic, and Alex. Please enter a name.\r\n\0",1,0);
+  char c[80]=readString()
   while(1);
 }
 
@@ -79,10 +80,18 @@ void clearScreen()
     ++i;
   }
 }
+
+char* readString()
+{
+    char temp[256];
+  while(*c != '\0xD')
+  {
+    char* temp = interrupt(22,0,0,0,0);
+  }
+  return temp;
+}
 /* MAKE FUTURE UPDATES HERE */
 /* VVVVVVVVVVVVVVVVVVVVVVVV */
-
-
 
 /* ^^^^^^^^^^^^^^^^^^^^^^^^ */
 /* MAKE FUTURE UPDATES HERE */

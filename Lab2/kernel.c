@@ -27,12 +27,16 @@
 void handleInterrupt21(int,int,int,int);
 void printLogo();
 void clearScreen();
-//
+void readString(char*);
+
+
 void main()
 {
+  char input[80];
   makeInterrupt21();
   printLogo();
   interrupt(33,0,"Hello world from Chayton, Dominic, and Alex.\r\n\0",1,0);
+  readString(input);
   while(1);
 }
 
@@ -66,7 +70,7 @@ void printLogo()
   interrupt(33,0,"   //   \\\\        | |_) | | (_| | (__|   <| |__| | |__| |____) |\r\n\0",0,0);
   interrupt(33,0,"._/'     `\\.      |____/|_|\\__,_|\\___|_|\\_\\_____/ \\____/|_____/\r\n\0",0,0);
   interrupt(33,0," BlackDOS2020 v. 1.03, c. 2019. Based on a project by M. Black. \r\n\0",0,0);
-  interrupt(33,0," Author(s): Chayton, Dominic, and Alex.\r\n\r\n\0",0,0);
+  interrupt(33,0," Author(s): Chayton, Dominic, and Alex, and Test.\r\n\r\n\0",0,0);
 }
 
 void clearScreen()
@@ -79,6 +83,24 @@ void clearScreen()
     ++i;
   }
 }
+
+void readString(char* c)
+{   
+    char temp;
+    char al;
+    char ah;
+    int ax;
+    while(temp != 0xd)
+    {
+        temp = interrupt(22,0,0,0,0);
+        al = temp;
+        ah = 14;
+        ax = ah * 256 + al;
+        interrupt(16, ax, 0, 0, 0); 
+    }
+    return;
+}
+
 /* MAKE FUTURE UPDATES HERE */
 /* VVVVVVVVVVVVVVVVVVVVVVVV */
 

@@ -30,6 +30,7 @@ void clearScreen();
 void readString(char*, int);
 int mod(int, int);
 int div(int, int);
+void readInt(int* n);
 
 
 void main()
@@ -126,6 +127,24 @@ int div(int a, int b)
     int q = 0;
     while (q * b <= a) ++q;
     return (q - 1);
+}
+
+void readInt(int* n)
+{
+    int temp;
+    int i;
+    char* c;
+    *n = 0;
+    readString(c);
+    
+    /* wont compile when i is declared inside for loop */
+    for(i = 0; c[i] != 0x0; ++i)
+    {
+        temp *= 10 + c[i] - '0';
+    }
+    
+    *n = temp;
+    return;
 }
 
 

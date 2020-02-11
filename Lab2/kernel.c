@@ -28,6 +28,8 @@ void handleInterrupt21(int,int,int,int);
 void printLogo();
 void clearScreen();
 void readString(char*, int);
+int mod(int, int);
+int div(int, int);
 
 
 void main()
@@ -111,6 +113,21 @@ void readString(char* c, int size)
     c[size-1] = 0x0;
     return;
 }
+
+int mod(int a, int b)
+{
+    int x = a;
+    while (x >= b) x = x - b;
+    return x;
+}
+
+int div(int a, int b)
+{
+    int q = 0;
+    while (q * b <= a) ++q;
+    return (q - 1);
+}
+
 
 /* MAKE FUTURE UPDATES HERE */
 /* VVVVVVVVVVVVVVVVVVVVVVVV */

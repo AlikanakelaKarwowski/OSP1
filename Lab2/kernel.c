@@ -27,16 +27,17 @@
 void handleInterrupt21(int,int,int,int);
 void printLogo();
 void clearScreen();
-void readString(char*);
+void readString(char*, int);
 
 
 void main()
 {
-  char input[80];
+  int inputSize = 80;
+  char input[80]; /* doing input[inputSize] causes an error */
   makeInterrupt21();
   printLogo();
   interrupt(33,0,"Hello world from Chayton, Dominic, and Alex.\r\n\0",1,0);
-  readString(input);
+  readString(input, inputSize);
   while(1);
 }
 
@@ -84,20 +85,30 @@ void clearScreen()
   }
 }
 
-void readString(char* c)
+void readString(char* c, int size)
 {   
     char temp;
     char al;
     char ah;
     int ax;
+    int index;
+    
     while(temp != 0xd)
     {
         temp = interrupt(22,0,0,0,0);
         al = temp;
         ah = 14;
         ax = ah * 256 + al;
-        interrupt(16, ax, 0, 0, 0); 
+        interrupt(16, ax, 0, 0, 0);
+        
+        if(temp == 0x8 && index >= 0)
+        {
+            --index;
+        }
+        
+        ++index;
     }
+    c[size-1] = 0x0;
     return;
 }
 

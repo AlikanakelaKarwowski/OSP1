@@ -131,7 +131,6 @@ int div(int a, int b)
 
 void readInt(int* n)
 {
-    int temp;
     int i;
     char* c;
     *n = 0;
@@ -140,10 +139,9 @@ void readInt(int* n)
     /* wont compile when i is declared inside for loop */
     for(i = 0; c[i] != 0x0; ++i)
     {
-        temp *= 10 + c[i] - '0';
+        *n *= 10 + c[i] - '0';
     }
     
-    *n = temp;
     return;
 }
 

@@ -89,28 +89,30 @@ void clearScreen()
 }
 
 void readString(char* c, int size)
-{   
+{
     char temp;
     char al;
     char ah;
     int ax;
     int index;
-    
+
     while(temp != 0xd)
     {
         temp = interrupt(22,0,0,0,0);
         al = temp;
         ah = 14;
         ax = ah * 256 + al;
+        c[index] = temp;
         interrupt(16, ax, 0, 0, 0);
-        
+
         if(temp == 0x8 && index >= 0)
         {
             --index;
         }
-        
+
         ++index;
     }
+
     c[size-1] = 0x0;
     return;
 }
@@ -135,13 +137,13 @@ void readInt(int* n)
     char* c;
     *n = 0;
     readString(c);
-    
+
     /* wont compile when i is declared inside for loop */
     for(i = 0; c[i] != 0x0; ++i)
     {
         *n *= 10 + c[i] - '0';
     }
-    
+
     return;
 }
 

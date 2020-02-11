@@ -115,6 +115,8 @@ void readString(char* c, int size)
 
     c[size-1] = 0x0;
     return;
+
+    /* atom://teletype/portal/3a1ccca4-93c8-4b3d-b401-f91a9b3aed09 */
 }
 
 int mod(int a, int b)

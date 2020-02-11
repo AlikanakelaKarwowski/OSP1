@@ -31,16 +31,26 @@ void readString(char*, int);
 int mod(int, int);
 int div(int, int);
 void readInt(int* n);
+void writeInt(int, int);
 
 
 void main()
 {
+  int i = 0;
   int inputSize = 80;
+  int *n = 0;
   char input[80]; /* doing input[inputSize] causes an error */
   makeInterrupt21();
   printLogo();
   interrupt(33,0,"Hello world from Chayton, Dominic, and Alex.\r\n\0",1,0);
   readString(input, inputSize);
+  interrupt(33,1,input,0);
+  interrupt(33,0,"Output Below\r\n\0",0,0);
+  interrupt(33,0,input,0);
+  interrupt(33,0,"\r\n\0",0,0);
+  /*readInt(n);
+  writeInt(10,0);*/
+
   while(1);
 }
 
@@ -116,7 +126,7 @@ void readString(char* c, int size)
     c[size-1] = 0x0;
     return;
 
-    /* atom://teletype/portal/3a1ccca4-93c8-4b3d-b401-f91a9b3aed09 */
+    /*atom://teletype/portal/3a1ccca4-93c8-4b3d-b401-f91a9b3aed09*/
 }
 
 int mod(int a, int b)
@@ -143,9 +153,33 @@ void readInt(int* n)
     /* wont compile when i is declared inside for loop */
     for(i = 0; c[i] != 0x0; ++i)
     {
-        *n *= 10 + c[i] - '0';
+        *n *= 10;
+        *n += c[i] - '0';
     }
 
+    return;
+}
+
+void writeInt(int x, int z)
+{
+    int i = 0;
+    char tmp[5];
+
+    // Fill buffer with digit characters in reverse order.
+    while (x != 0)
+    {
+        tmp[i++] = (char) (mod(x,10) + '0');
+        x = div(x,10);
+        /*interrupt(33,0,"3\r\n\0",0,0);*/
+    }
+
+    while(i > 0)
+    {
+        interrupt(33,0,tmp[i],z, 0);
+        i -= 1;
+        /*interrupt(33,0,"4\r\n\0",0,0);*/
+    }
+    /*interrupt(33,0,"5\r\n\0",0,0);*/
     return;
 }
 
@@ -166,7 +200,16 @@ void handleInterrupt21(int ax, int bx, int cx, int dx)
     case 0:
       printString(bx, cx);
       break;
-  /*      case 1: case 2: case 3: case 4: case 5: */
+    case 1:
+      readString(bx, cx);
+      break;
+    case 13:
+      writeInt(bx, cx);
+      break;
+    case 14:
+      readInt(bx);
+      break;
+    /*case 2: case 3: case 4: case 5: */
   /*      case 6: case 7: case 8: case 9: case 10: */
   /*      case 11: case 12: case 13: case 14: case 15: */
     default:

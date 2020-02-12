@@ -43,13 +43,16 @@ void main()
   makeInterrupt21();
   printLogo();
   interrupt(33,0,"Hello world from Chayton, Dominic, and Alex.\r\n\0",1,0);
+  
   /*
   readString(input, inputSize);
   interrupt(33,1,input,0); 
   interrupt(33,0,input,0);
   */
+  
   readInt(n);
-  writeInt(10,0);
+  writeInt(4,0);
+  
 
 
   while(1);
@@ -172,23 +175,20 @@ void readInt(int* n)
 void writeInt(int x, int z)
 {
     int i = 0;
-    char tmp[5];
+    char *tmp[5];
 
-    // Fill buffer with digit characters in reverse order.
+    /*Fill buffer with digit characters in reverse order.*/
     while (x != 0)
     {
         tmp[i++] = (char) (mod(x,10) + '0');
         x = div(x,10);
-        /*interrupt(33,0,"3\r\n\0",0,0);*/
     }
 
     while(i > 0)
     {
-        interrupt(33,0,tmp[i],z, 0);
+        printString(tmp[i], 0);
         i -= 1;
-        /*interrupt(33,0,"4\r\n\0",0,0);*/
     }
-    /*interrupt(33,0,"5\r\n\0",0,0);*/
     return;
 }
 

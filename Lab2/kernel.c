@@ -43,13 +43,14 @@ void main()
   makeInterrupt21();
   printLogo();
   interrupt(33,0,"Hello world from Chayton, Dominic, and Alex.\r\n\0",1,0);
+  /*
   readString(input, inputSize);
-  interrupt(33,1,input,0);
-  interrupt(33,0,"Output Below\r\n\0",0,0);
+  interrupt(33,1,input,0); 
   interrupt(33,0,input,0);
-  interrupt(33,0,"\r\n\0",0,0);
-  /*readInt(n);
-  writeInt(10,0);*/
+  */
+  readInt(n);
+  writeInt(10,0);
+
 
   while(1);
 }
@@ -105,25 +106,33 @@ void readString(char* c, int size)
     char ah;
     int ax;
     int index;
-
-    while(temp != 0xd)
+    int flag;
+    flag = 0;
+    
+    while(flag != 1)
     {
-        temp = interrupt(22,0,0,0,0);
-        al = temp;
-        ah = 14;
-        ax = ah * 256 + al;
-        c[index] = temp;
-        interrupt(16, ax, 0, 0, 0);
-
+        temp = interrupt(22,0,0,0);
+        
         if(temp == 0x8 && index >= 0)
         {
             --index;
         }
-
+        
+        if(temp == 0xd)
+        {
+            c[size-1] = 0x0;
+            flag = 1;
+            return;
+        }
+        
+        c[index] = temp;
         ++index;
+        al = temp;
+        ah = 14;
+        ax = ah * 256 + al;
+        interrupt(16,ax,0,0,0);
+        
     }
-
-    c[size-1] = 0x0;
     return;
 
     /*atom://teletype/portal/3a1ccca4-93c8-4b3d-b401-f91a9b3aed09*/

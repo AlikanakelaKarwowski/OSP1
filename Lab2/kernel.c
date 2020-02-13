@@ -19,7 +19,7 @@
 /*                                                                        */
 /*                                                                        */
 /*                                                                        */
-/* Signed:Alex Karwowski, Chayton Hamric, Dominic Cumba Date: 1/27/20   */
+/* Signed:Alex Karwowski, Chayton Hamric, Dominic Cumba Date: 1/27/20     */
 /*                                                                        */
 /*                                                                        */
 /* 3460:4/526 BlackDOS2020 kernel, Version 1.03, Fall 2019.               */
@@ -42,6 +42,7 @@ void main()
   makeInterrupt21();
   printLogo();
   interrupt(33,0,"Hello world from Chayton, Dominic, and Alex.\r\n\0",1,0);
+<<<<<<< HEAD
   
   
   readString(input);
@@ -51,6 +52,18 @@ void main()
   readInt(n);
   writeInt(4,0);
   */
+=======
+
+  /*
+  readString(input, inputSize);
+  interrupt(33,1,input,0);
+  interrupt(33,0,input,0);
+  */
+
+  readInt(n);
+  writeInt(4,0);
+
+>>>>>>> 89dc296d47db2e002e1440ca787b19754a3524ee
 
 
   while(1);
@@ -86,7 +99,7 @@ void printLogo()
   interrupt(33,0,"   //   \\\\        | |_) | | (_| | (__|   <| |__| | |__| |____) |\r\n\0",0,0);
   interrupt(33,0,"._/'     `\\.      |____/|_|\\__,_|\\___|_|\\_\\_____/ \\____/|_____/\r\n\0",0,0);
   interrupt(33,0," BlackDOS2020 v. 1.03, c. 2019. Based on a project by M. Black. \r\n\0",0,0);
-  interrupt(33,0," Author(s): Chayton, Dominic, and Alex, and Test.\r\n\r\n\0",0,0);
+  interrupt(33,0," Author(s): Chayton, Dominic, and Alex.\r\n\r\n\0",0,0);
 }
 
 void clearScreen()
@@ -130,7 +143,7 @@ int mod(int a, int b)
 {
     int x = a;
     while (x >= b) x = x - b;
-    return x;
+    return x;/*atom://teletype/portal/22e4a719-1c5a-4ba7-b749-9599033d67d2*/
 }
 
 int div(int a, int b)
@@ -160,23 +173,27 @@ void readInt(int* n)
 void writeInt(int x, int z)
 {
     int i = 0;
-    char *tmp[5];
+    int temp = x;
+    while (mod(temp,10)!= 0)
+    {
+      i++;
+      temp = div(temp,10);
 
+    }
+    char tmp[i+1];
+    tmp[i+1] = '\0';
+    i=0;
     /*Fill buffer with digit characters in reverse order.*/
     while (x != 0)
     {
         tmp[i++] = (char) (mod(x,10) + '0');
         x = div(x,10);
     }
-
-    while(i > 0)
-    {
-        printString(tmp[i], 0);
-        i -= 1;
-    }
+    printString(tmp, z);
     return;
 }
 
+/*atom://teletype/portal/22e4a719-1c5a-4ba7-b749-9599033d67d2*/
 
 /* MAKE FUTURE UPDATES HERE */
 /* VVVVVVVVVVVVVVVVVVVVVVVV */

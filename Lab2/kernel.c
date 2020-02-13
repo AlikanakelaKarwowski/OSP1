@@ -115,7 +115,6 @@ void readString(char* c, int size)
     while(flag != 1)
     {
         temp = interrupt(22,0,0,0);
-
         if(temp == 0x8 && index >= 0)
         {
             --index;
@@ -127,14 +126,13 @@ void readString(char* c, int size)
             flag = 1;
             return;
         }
-
+        
         c[index] = temp;
         ++index;
         al = temp;
         ah = 14;
         ax = ah * 256 + al;
         interrupt(16,ax,0,0,0);
-
     }
     return;
 

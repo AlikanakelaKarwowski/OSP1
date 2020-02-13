@@ -31,7 +31,7 @@ void readString(char*, int);
 int mod(int, int);
 int div(int, int);
 void readInt(int* n);
-void writeInt(int, int )
+void writeInt(int, int);
 
 
 void main()
@@ -126,7 +126,7 @@ void readString(char* c, int size)
             flag = 1;
             return;
         }
-        
+
         c[index] = temp;
         ++index;
         al = temp;

@@ -188,13 +188,13 @@ void writeInt(int x, int print)
     /*Fill buffer with digit characters in reverse order.*/
     while (x != 0)
     {
-        tmp[i++] = (char) (mod(x,10) + 48);
+        temp[i++] = (char) (mod(x,10) + 48);
         x = div(x,10);
     }
 
     while(i > 0)
     {
-        p = tmp[--i];
+        p = temp[--i];
         store[k++] = p;
     }
 

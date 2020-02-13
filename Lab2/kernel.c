@@ -159,13 +159,13 @@ void writeInt(int x, int z)
 {
     int i = 0;
     int temp = x;
+    char tmp[6];
     while (mod(temp,10)!= 0)
     {
       i++;
       temp = div(temp,10);
 
     }
-    char tmp[i+1];
     tmp[i+1] = '\0';
     i=0;
     /*Fill buffer with digit characters in reverse order.*/

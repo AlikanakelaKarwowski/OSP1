@@ -51,7 +51,7 @@ void main()
     */
 
     readInt(n);
-    writeInt(4,0);
+    writeInt(n,0);
 
 
 
@@ -152,7 +152,7 @@ int div(int a, int b)
     while (q * b <= a) ++q;
     return (q - 1);
 }
-
+/*
 void readInt(int* n)
 {
     int i;
@@ -160,7 +160,7 @@ void readInt(int* n)
     *n = 0;
     readString(c);
 
-    /* wont compile when i is declared inside for loop */
+    /* wont compile when i is declared inside for loop *
     for(i = 0; c[i] != 0x0; ++i)
     {
         *n *= 10;
@@ -169,6 +169,39 @@ void readInt(int* n)
 
     return;
 }
+*/
+void readInt(int* num)
+{
+  char array[80]; /*array to hold string input*/
+  int i = 0, j = 0; /* i for conversion, j for array size */
+  *num = 0;
+  readString(array); /*to fill array*/
+  while(array[j] != 0) /*finds the size of the string and stores in j*/
+  {
+    j++;
+  }
+  if(j > 5)  /*condition to ensure values that will fit into 16-bit ints*/
+  {
+    while(i < 5)
+    {
+      /*works left to right for conversion*/
+      *num = *num * 10; /*multiply by 10 to keep correct place value*/
+      *num = *num + (array[i] - '0'); /*add */
+      i++; /*increment until a number with 5 digits is processed*/
+    }
+  }
+  else
+  {
+    while(i < j)
+    {
+      /*works left to right for conversion*/
+      *num = *num * 10; /*multiply by 10 to keep correct place value*/
+      *num = *num + (array[i] - '0'); /*add to correct current ending digit*/
+      i++; /*increment until all digits of the number are processed*/
+    }
+  }
+}
+
 /*
 void writeInt(int x, int print)
 {

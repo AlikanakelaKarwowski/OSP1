@@ -177,18 +177,17 @@ void writeInt(int x, int z)
     int i = 0;
     int temp = x;
     char tmp[6];
-    while (mod(temp,10)!= 0)
+    while (mod(temp,x+1)!= 0)
     {
       i++;
       temp = div(temp,10);
 
     }
     tmp[i+1] = '\0';
-    i=0;
     /*Fill buffer with digit characters in reverse order.*/
     while (x != 0)
     {
-        tmp[i++] = (char) (mod(x,10) + '0');
+        tmp[i--] = (char) (mod(x,10) + '0');
         x = div(x,10);
     }
     printString(tmp, z);

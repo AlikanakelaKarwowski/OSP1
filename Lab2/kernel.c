@@ -172,21 +172,21 @@ int div(int a, int b)
     return (q - 1);
 }
 
-void readInt(int* num)
+void readInt(int* n)
 {
     int i;
-      char* c;
-      n = 0;
-      readString(c);
+    char* c;
+    n = 0;
+    readString(c);
 
-      /* wont compile when i is declared inside for loop */
-      for(i = 0; c[i] != 0x0; ++i)
-      {
-          *n *= 10;
-          *n += c[i] - '0';
-      }
+    /* wont compile when i is declared inside for loop */
+    for(i = 0; c[i] != 0x0; ++i)
+    {
+      *n *= 10;
+      *n += c[i] - '0';
+    }
 
-      return;
+    return;
 }
 
 

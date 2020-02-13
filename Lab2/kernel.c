@@ -43,16 +43,16 @@ void main()
   makeInterrupt21();
   printLogo();
   interrupt(33,0,"Hello world from Chayton, Dominic, and Alex.\r\n\0",1,0);
-  
+
   /*
   readString(input, inputSize);
-  interrupt(33,1,input,0); 
+  interrupt(33,1,input,0);
   interrupt(33,0,input,0);
   */
-  
+
   readInt(n);
   writeInt(4,0);
-  
+
 
 
   while(1);
@@ -111,34 +111,34 @@ void readString(char* c, int size)
     int index;
     int flag;
     flag = 0;
-    
+
     while(flag != 1)
     {
         temp = interrupt(22,0,0,0);
-        
+
         if(temp == 0x8 && index >= 0)
         {
             --index;
         }
-        
+
         if(temp == 0xd)
         {
             c[size-1] = 0x0;
             flag = 1;
             return;
         }
-        
+
         c[index] = temp;
         ++index;
         al = temp;
         ah = 14;
         ax = ah * 256 + al;
         interrupt(16,ax,0,0,0);
-        
+
     }
     return;
 
-    /*atom://teletype/portal/3a1ccca4-93c8-4b3d-b401-f91a9b3aed09*/
+    
 }
 
 int mod(int a, int b)
@@ -175,7 +175,7 @@ void readInt(int* n)
 void writeInt(int x, int z)
 {
     int i = 0;
-    char *tmp[5];
+    char tmp[5];
 
     /*Fill buffer with digit characters in reverse order.*/
     while (x != 0)
@@ -183,10 +183,10 @@ void writeInt(int x, int z)
         tmp[i++] = (char) (mod(x,10) + '0');
         x = div(x,10);
     }
-
+    Temp[i] = '\0';
     while(i > 0)
     {
-        printString(tmp[i], 0);
+        printString(tmp[i], z);
         i -= 1;
     }
     return;

@@ -169,7 +169,7 @@ void readInt(int* n)
 
     return;
 }
-
+/*
 void writeInt(int x, int print)
 {
     int i = 0;
@@ -185,7 +185,7 @@ void writeInt(int x, int print)
         return;
     }
 
-    /*Fill buffer with digit characters in reverse order.*/
+    /*Fill buffer with digit characters in reverse order.*
     while (x != 0)
     {
         temp[i++] = (char) (mod(x,10) + 48);
@@ -202,6 +202,46 @@ void writeInt(int x, int print)
 
     interrupt(33, 0, store, print, 0);
     return;
+}*/
+
+void writeInt(int num, int destination)
+{
+  char intToString[80]; /*stores the parameter in reverse order*/
+  char temp; /*used to store character when reversing array*/
+  int i = 0, j = 0; /*to keep track of size of reverseOrder*/
+  if(num == 0) /*special case when the number is equal to 0*/
+  {
+    intToString[0] = '0';
+    intToString[1] = 0;
+    interrupt(33, 0, intToString, 0, 0); /*prints converted number to screen*/
+    return;
+  }
+    while(num != 0)
+    {
+      /*stores digits in intToString in reverse order*/
+      intToString[i] = (char) (mod(num, 10) + '0'); /*stores the last digit of num in array*/
+      num = div(num, 10); /*modifies num so that the next to last digit can be taken on next iteration*/
+      i++;
+    }
+    intToString[i] = 0; /*appends string with null terminator*/
+    i--; /*decrement to avoid moving null terminator when reversing array*/
+    while(j < i) /*while there is chracters to reverse*/
+    {
+      temp = intToString[j];
+      intToString[j] = intToString[i];
+      intToString[i] = temp;
+      ++j;
+      --i;
+    }
+    if(destination == 0)
+    {
+      interrupt(33, 0, intToString, 0, 0); /*prints converted number to screen*/
+    }
+    else if(destination == 1)
+    {
+      interrupt(33, 0, intToString, 1, 0);
+    }
+
 }
 
 /*atom://teletype/portal/22e4a719-1c5a-4ba7-b749-9599033d67d2*/

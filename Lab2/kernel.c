@@ -19,7 +19,7 @@
 /*                                                                        */
 /*                                                                        */
 /*                                                                        */
-/* Signed:Alex Karwowski, Chayton Hamric, Dominic Cumba Date: 1/27/20   */
+/* Signed:Alex Karwowski, Chayton Hamric, Dominic Cumba Date: 1/27/20     */
 /*                                                                        */
 /*                                                                        */
 /* 3460:4/526 BlackDOS2020 kernel, Version 1.03, Fall 2019.               */
@@ -145,7 +145,7 @@ int mod(int a, int b)
 {
     int x = a;
     while (x >= b) x = x - b;
-    return x;
+    return x;/*atom://teletype/portal/22e4a719-1c5a-4ba7-b749-9599033d67d2*/
 }
 
 int div(int a, int b)
@@ -175,7 +175,14 @@ void readInt(int* n)
 void writeInt(int x, int z)
 {
     int i = 0;
-    char tmp[6];
+    int temp = x;
+    while (mod(temp,10)!= 0)
+    {
+      i++;
+      temp = div(temp,10);
+
+    }
+    char tmp[i+1];
 
     for(i = 0; i < 6; i++) tmp[i] = '0'; i = 0;
 

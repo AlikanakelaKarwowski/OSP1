@@ -42,7 +42,6 @@ void main()
   makeInterrupt21();
   printLogo();
   interrupt(33,0,"Hello world from Chayton, Dominic, and Alex.\r\n\0",1,0);
-<<<<<<< HEAD
   
   
   readString(input);
@@ -52,20 +51,6 @@ void main()
   readInt(n);
   writeInt(4,0);
   */
-=======
-
-  /*
-  readString(input, inputSize);
-  interrupt(33,1,input,0);
-  interrupt(33,0,input,0);
-  */
-
-  readInt(n);
-  writeInt(4,0);
-
->>>>>>> 89dc296d47db2e002e1440ca787b19754a3524ee
-
-
   while(1);
 }
 

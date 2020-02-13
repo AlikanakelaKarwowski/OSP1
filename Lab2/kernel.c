@@ -183,11 +183,9 @@ void writeInt(int x, int z)
 
     }
     char tmp[i+1];
-
-    for(i = 0; i < 6; i++) tmp[i] = '0'; i = 0;
-
+    tmp[i+1] = '\0';
+    i=0;
     /*Fill buffer with digit characters in reverse order.*/
-    tmp[5] = '\0'; i = 4;
     while (x != 0)
     {
         tmp[i++] = (char) (mod(x,10) + '0');

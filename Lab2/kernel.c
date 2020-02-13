@@ -138,7 +138,7 @@ void readString(char* c, int size)
     }
     return;
 
-    
+
 }
 
 int mod(int a, int b)
@@ -183,7 +183,7 @@ void writeInt(int x, int z)
         tmp[i++] = (char) (mod(x,10) + '0');
         x = div(x,10);
     }
-    Temp[i] = '\0';
+    tmp[i] = '\0';
     while(i > 0)
     {
         printString(tmp[i], z);

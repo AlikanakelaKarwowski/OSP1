@@ -88,7 +88,7 @@ void printLogo()
   interrupt(33,0,"   //   \\\\        | |_) | | (_| | (__|   <| |__| | |__| |____) |\r\n\0",0,0);
   interrupt(33,0,"._/'     `\\.      |____/|_|\\__,_|\\___|_|\\_\\_____/ \\____/|_____/\r\n\0",0,0);
   interrupt(33,0," BlackDOS2020 v. 1.03, c. 2019. Based on a project by M. Black. \r\n\0",0,0);
-  interrupt(33,0," Author(s): Chayton, Dominic, and Alex, and Test.\r\n\r\n\0",0,0);
+  interrupt(33,0," Author(s): Chayton, Dominic, and Alex.\r\n\r\n\0",0,0);
 }
 
 void clearScreen()
@@ -175,23 +175,22 @@ void readInt(int* n)
 void writeInt(int x, int z)
 {
     int i = 0;
-    char tmp[5];
+    char tmp[6];
+
+    for(i = 0; i < 6; i++) tmp[i] = '0'; i = 0;
 
     /*Fill buffer with digit characters in reverse order.*/
+    tmp[5] = '\0'; i = 4;
     while (x != 0)
     {
         tmp[i++] = (char) (mod(x,10) + '0');
         x = div(x,10);
     }
-    tmp[i] = '\0';
-    while(i > 0)
-    {
-        printString(tmp[i], z);
-        i -= 1;
-    }
+    printString(tmp, z);
     return;
 }
 
+/*atom://teletype/portal/22e4a719-1c5a-4ba7-b749-9599033d67d2*/
 
 /* MAKE FUTURE UPDATES HERE */
 /* VVVVVVVVVVVVVVVVVVVVVVVV */

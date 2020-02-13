@@ -27,7 +27,7 @@
 void handleInterrupt21(int,int,int,int);
 void printLogo();
 void clearScreen();
-void readString(char*);
+void readString(char*, int);
 int mod(int, int);
 int div(int, int);
 void readInt(int* n);
@@ -37,20 +37,24 @@ void writeInt(int, int);
 void main()
 {
   int i = 0;
+  int inputSize = 80;
   int *n = 0;
   char input[80]; /* doing input[inputSize] causes an error */
   makeInterrupt21();
   printLogo();
   interrupt(33,0,"Hello world from Chayton, Dominic, and Alex.\r\n\0",1,0);
-  
-  
-  readString(input);
-  interrupt(33,1,input,0); 
-  interrupt(33,0,input,0);
+
   /*
+  readSring(input, inputSize);
+  interrupt(33,1,input,0);
+  interrupt(33,0,input,0);
+  */
+
   readInt(n);
   writeInt(4,0);
-  */
+
+
+
   while(1);
 }
 
@@ -98,30 +102,43 @@ void clearScreen()
   }
 }
 
-void readString(char* c)
+void readString(char* c, int size)
 {
     char temp;
     char al;
     char ah;
     int ax;
     int index;
-    
-    while(temp != 0xd)
+    int flag;
+    flag = 0;
+
+    while(flag != 1)
     {
         temp = interrupt(22,0,0,0);
+
+        if(temp == 0x8 && index >= 0)
+        {
+            --index;
+        }
+
+        if(temp == 0xd)
+        {
+            c[size-1] = 0x0;
+            flag = 1;
+            return;
+        }
+
         c[index] = temp;
         ++index;
         al = temp;
         ah = 14;
         ax = ah * 256 + al;
         interrupt(16,ax,0,0,0);
-        if(temp == 0x8 && index >= 0)
-        {
-            --index;
-        }
+
     }
-    c[index-1] = 0x0;
     return;
+
+
 }
 
 int mod(int a, int b)

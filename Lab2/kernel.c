@@ -31,75 +31,75 @@ void readString(char*, int);
 int mod(int, int);
 int div(int, int);
 void readInt(int* n);
-void writeInt(int, int);
+void writeInt(int, int )
 
 
 void main()
 {
-  int i = 0;
-  int inputSize = 80;
-  int *n = 0;
-  char input[80]; /* doing input[inputSize] causes an error */
-  makeInterrupt21();
-  printLogo();
-  interrupt(33,0,"Hello world from Chayton, Dominic, and Alex.\r\n\0",1,0);
+    int i = 0;
+    int inputSize = 80;
+    int *n = 0;
+    char input[80]; /* doing input[inputSize] causes an error */
+    makeInterrupt21();
+    printLogo();
+    interrupt(33,0,"Hello world from Chayton, Dominic, and Alex.\r\n\0",1,0);
 
-  /*
-  readSring(input, inputSize);
-  interrupt(33,1,input,0);
-  interrupt(33,0,input,0);
-  */
+    /*
+    readSring(input, inputSize);
+    interrupt(33,1,input,0);
+    interrupt(33,0,input,0);
+    */
 
-  readInt(n);
-  writeInt(4,0);
+    readInt(n);
+    writeInt(4,0);
 
 
 
-  while(1);
+    while(1);
 }
 
 void printString(char* c, int d)
 {
-  if(d ==1)
-    while(*c != '\0')
-    {
-      interrupt(23, *c, 0, 0, 0);
-      c++;
-    }
-  else
-    while(*c != '\0')
-    {
-      char al = *c;
-      char ah = 14;
-      int ax = ah * 256 + al;
-      interrupt(16, ax, 0, 0, 0);
-      c++;
-    }
-  /* fill this in */
-  return;
+    if(d ==1)
+        while(*c != '\0')
+        {
+            interrupt(23, *c, 0, 0, 0);
+            c++;
+        }
+    else
+        while(*c != '\0')
+        {
+            char al = *c;
+            char ah = 14;
+            int ax = ah * 256 + al;
+            interrupt(16, ax, 0, 0, 0);
+            c++;
+        }
+    /* fill this in */
+    return;
 }
 
 void printLogo()
 {
-  interrupt(33,0,"       ___   `._   ____  _            _    _____   ____   _____ \r\n\0",0,0);
-  interrupt(33,0,"      /   \\__/__> |  _ \\| |          | |  |  __ \\ / __ \\ / ____|\r\n\0",0,0);
-  interrupt(33,0,"     /_  \\  _/    | |_) | | __ _  ___| | _| |  | | |  | | (___ \r\n\0",0,0);
-  interrupt(33,0,"    // \\ /./      |  _ <| |/ _` |/ __| |/ / |  | | |  | |\\___ \\ \r\n\0",0,0);
-  interrupt(33,0,"   //   \\\\        | |_) | | (_| | (__|   <| |__| | |__| |____) |\r\n\0",0,0);
-  interrupt(33,0,"._/'     `\\.      |____/|_|\\__,_|\\___|_|\\_\\_____/ \\____/|_____/\r\n\0",0,0);
-  interrupt(33,0," BlackDOS2020 v. 1.03, c. 2019. Based on a project by M. Black. \r\n\0",0,0);
-  interrupt(33,0," Author(s): Chayton, Dominic, and Alex.\r\n\r\n\0",0,0);
+    interrupt(33,0,"       ___   `._   ____  _            _    _____   ____   _____ \r\n\0",0,0);
+    interrupt(33,0,"      /   \\__/__> |  _ \\| |          | |  |  __ \\ / __ \\ / ____|\r\n\0",0,0);
+    interrupt(33,0,"     /_  \\  _/    | |_) | | __ _  ___| | _| |  | | |  | | (___ \r\n\0",0,0);
+    interrupt(33,0,"    // \\ /./      |  _ <| |/ _` |/ __| |/ / |  | | |  | |\\___ \\ \r\n\0",0,0);
+    interrupt(33,0,"   //   \\\\        | |_) | | (_| | (__|   <| |__| | |__| |____) |\r\n\0",0,0);
+    interrupt(33,0,"._/'     `\\.      |____/|_|\\__,_|\\___|_|\\_\\_____/ \\____/|_____/\r\n\0",0,0);
+    interrupt(33,0," BlackDOS2020 v. 1.03, c. 2019. Based on a project by M. Black. \r\n\0",0,0);
+    interrupt(33,0," Author(s): Chayton, Dominic, and Alex.\r\n\r\n\0",0,0);
 }
 
 void clearScreen()
 {
-  int i = 0;
-  while(i <=24)
-  {
-    interrupt(33,0,"\r",0,0);
-    interrupt(33,0,"\n",0,0);
-    ++i;
-  }
+    int i = 0;
+    while(i <=24)
+    {
+        interrupt(33,0,"\r",0,0);
+        interrupt(33,0,"\n",0,0);
+        ++i;
+    }
 }
 
 void readString(char* c, int size)
@@ -145,7 +145,7 @@ int mod(int a, int b)
 {
     int x = a;
     while (x >= b) x = x - b;
-    return x;/*atom://teletype/portal/22e4a719-1c5a-4ba7-b749-9599033d67d2*/
+    return x;
 }
 
 int div(int a, int b)
@@ -172,25 +172,37 @@ void readInt(int* n)
     return;
 }
 
-void writeInt(int x, int z)
+void writeInt(int x, int print)
 {
     int i = 0;
-    int temp = x;
-    char tmp[6];
-    while (mod(temp,x+1)!= 0)
+    int k = 0;
+    char temp[6];
+    char store[6];
+    char p;
+    if(x == 0)
     {
-      i++;
-      temp = div(temp,10);
-
+        store[0] = '0';
+        store[1] = 0;
+        interrupt(33, 0, store, 0, 0);
+        return;
     }
-    tmp[i+1] = '\0';
+
     /*Fill buffer with digit characters in reverse order.*/
     while (x != 0)
     {
-        tmp[i--] = (char) (mod(x,10) + '0');
+        tmp[i++] = (char) (mod(x,10) + 48);
         x = div(x,10);
     }
-    printString(tmp, z);
+
+    while(i > 0)
+    {
+        p = tmp[--i];
+        store[k++] = p;
+    }
+
+    store[k] = '\0';
+
+    interrupt(33, 0, store, print, 0);
     return;
 }
 
@@ -206,26 +218,26 @@ void writeInt(int x, int z)
 
 void handleInterrupt21(int ax, int bx, int cx, int dx)
 {
-  /* return;  */
-  switch(ax)
-  {
-    case 0:
-      printString(bx, cx);
-      break;
-    case 1:
-      readString(bx, cx);
-      break;
-    case 13:
-      writeInt(bx, cx);
-      break;
-    case 14:
-      readInt(bx);
-      break;
-    /*case 2: case 3: case 4: case 5: */
-  /*      case 6: case 7: case 8: case 9: case 10: */
-  /*      case 11: case 12: case 13: case 14: case 15: */
-    default:
-      interrupt(33,0,"General BlackDOS error.\r\n\0",0,0);
-      break;
-  }
+    /* return;  */
+    switch(ax)
+    {
+        case 0:
+            printString(bx, cx);
+            break;
+        case 1:
+            readString(bx, cx);
+            break;
+        case 13:
+            writeInt(bx, cx);
+            break;
+        case 14:
+            readInt(bx);
+            break;
+        /*case 2: case 3: case 4: case 5: */
+        /*      case 6: case 7: case 8: case 9: case 10: */
+        /*      case 11: case 12: case 13: case 14: case 15: */
+        default:
+            interrupt(33,0,"General BlackDOS error.\r\n\0",0,0);
+            break;
+    }
 }

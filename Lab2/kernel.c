@@ -128,7 +128,7 @@ void readString(char* c, int size)
     char ah;
     int ax;
     int index;
-    
+
     while(temp != 0xd)
     {
         temp = interrupt(22,0,0,0);
@@ -164,8 +164,7 @@ int div(int a, int b)
 void readInt(int* n)
 {
     int i;
-    char* c;
-    n = 0;
+    char c[80];
     readString(c);
 
     /* wont compile when i is declared inside for loop */

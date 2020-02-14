@@ -165,6 +165,7 @@ void readInt(int* n)
 {
     int i;
     char c[80];
+    n=0;
     readString(c);
 
     /* wont compile when i is declared inside for loop */

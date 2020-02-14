@@ -161,41 +161,45 @@ void readString(char* c, int size)
 
 void readInt(int* n)
 {
-    int i = 0, LEN = 0;
+    int i = 0, length = 0, num = 0;
+    char *c;
+    char temp;
+    char al;
+    char ah;
+    int ax;
 
-    char c[80];
-    *n = 0;
-    readString(c);
-    while(c[LEN] != 0)
+    while(temp != 0xd)
     {
-        LEN++;
-    }
-    if(LEN > 5)
-    {
-        while(i < 5)
+        temp = interrupt(22,0,0,0);
+        c[i] = temp;
+        ++i;
+        al = temp;
+        ah = 14;
+        ax = ah * 256 + al;
+        interrupt(16,ax,0,0,0);
+        if(temp == 0x8 && i >= 0)
         {
-
-          *n = *n * 10;
-          *n = *n + (c[i] - '0');
-          i++;
-        }
-    }else{
-
-        while(i < LEN)
-        {
-          *n = *n * 10;
-          *n = *n + (c[i] - '0');
-          i++;
+            --i;
         }
     }
+    c[i-1] = 0x0;
+
+    while(length < (i-1))
+    {
+        num = num * 10;
+        num = num + (temp[length++] - '0');
+    }
+
+    *n = num;
+    return;
+}
     /* wont compile when i is declared inside for loop
     for(i = 0; c[i] != 0x0; ++i)
     {
       *n = *n * 10;
       *n = *n + (c[i] - '0');
     }*/
-    return;
-}
+
 
 /*
 void readInt(int* n) {
@@ -225,6 +229,8 @@ void readInt(int* n) {
     }
 
     *n = num;
+
+
 }
 */
 void writeInt(int x, int print)

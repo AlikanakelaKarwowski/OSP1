@@ -42,16 +42,16 @@ void main()
    makeInterrupt21();
    printLogo();
    interrupt(33,0,"\r\nWelcome to the Mad Libs kernel.\r\n\0",0,0);
-   interrupt(33,0,"Enter a food: \0",0,0);
+   interrupt(33,0,"Enter a food: \r\n\0",0,0); /* DIDNT READ */
    interrupt(33,1,food,0,0);
    temp = 0;
-   interrupt(33,0,"Enter a number between 100 and 120: \0",0,0);
+   interrupt(33,0,"Enter a number between 100 and 120: \r\n\0",0,0); /* DIDNT READ */
    interrupt(33,14,&temp,0,0);
-   interrupt(33,0,"Enter an adjective: \0",0,0);
+   interrupt(33,0,"Enter an adjective: \r\n\0",0,0); /* DIDNT READ */
    interrupt(33,1,adjective,0,0);
-   interrupt(33,0,"Enter a color: \0",0,0);
+   interrupt(33,0,"Enter a color: \r\n\0",0,0);
    interrupt(33,1,color,0,0);
-   interrupt(33,0,"Enter an animal: \0",0,0);
+   interrupt(33,0,"Enter an animal: \r\n\0",0,0);
    interrupt(33,1,animal,0,0);
    interrupt(33,0,"Your note is on the printer, go get it.\r\n\0",0,0);
    interrupt(33,0,"Dear Professor O\'Neil,\r\n\0",1,0);

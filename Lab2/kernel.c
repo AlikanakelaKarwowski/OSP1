@@ -225,8 +225,6 @@ void writeInt(int x, int print)
 }
 
 
-/*atom://teletype/portal/22e4a719-1c5a-4ba7-b749-9599033d67d2*/
-
 /* MAKE FUTURE UPDATES HERE */
 /* VVVVVVVVVVVVVVVVVVVVVVVV */
 

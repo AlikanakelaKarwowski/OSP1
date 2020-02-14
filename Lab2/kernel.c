@@ -45,10 +45,8 @@ void main()
    interrupt(33,0,"Enter a food: \0",0,0);
    interrupt(33,1,food,0,0);
    temp = 0;
-   while ((temp < 100) || (temp > 120)) {
-      interrupt(33,0,"Enter a number between 100 and 120: \0",0,0);
-      interrupt(33,14,&temp,0,0);
-   }
+   interrupt(33,0,"Enter a number between 100 and 120: \0",0,0);
+   interrupt(33,14,&temp,0,0);
    interrupt(33,0,"Enter an adjective: \0",0,0);
    interrupt(33,1,adjective,0,0);
    interrupt(33,0,"Enter a color: \0",0,0);

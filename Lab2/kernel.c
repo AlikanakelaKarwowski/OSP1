@@ -42,12 +42,14 @@ void main()
    makeInterrupt21();
    printLogo();
    interrupt(33,0,"\r\nWelcome to the Mad Libs kernel.\r\n\0",0,0);
-   interrupt(33,0,"\r\nEnter a food: \0",0,0); /* DIDNT READ */
+   interrupt(33,0,"\r\nEnter a food: \0",0,0);
    interrupt(33,1,food,0,0);
    temp = 0;
-   interrupt(33,0,"\r\nEnter a number between 100 and 120: \0",0,0); /* DIDNT READ */
-   interrupt(33,14,&temp,0,0);
-   interrupt(33,0,"\r\nEnter an adjective: \0",0,0); /* DIDNT READ */
+   while ((temp < 100) || (temp > 120)) {
+      interrupt(33,0,"Enter a number between 100 and 120: \0",0,0);
+      interrupt(33,14,&temp,0,0);
+   }
+   interrupt(33,0,"\r\nEnter an adjective: \0",0,0);
    interrupt(33,1,adjective,0,0);
    interrupt(33,0,"\r\nEnter a color: \0",0,0);
    interrupt(33,1,color,0,0);
@@ -72,7 +74,7 @@ void main()
    interrupt(33,0," on my computer, because he ate it. I am\r\n\0",1,0);
    interrupt(33,0,"currently rewriting the program and hope you will accept it late.\r\n\0",1,0);
    interrupt(33,0,"\r\nSincerely,\r\n\0",1,0);
-   interrupt(33,0,"(your name here)\r\n\0",1,0);
+   interrupt(33,0,"(Chayton, Alex, Dominic)\r\n\0",1,0);
    while(1);
 }
 void printString(char* c, int d)
@@ -196,48 +198,7 @@ void readInt(int* n)
     *n = num;
     return;
 }
-/*
-void readInt(int* n) {
-    int i = 0;
-    int j = 0;
-    char al;
-    char ah;
-    int ax;
-    char* tmp;
-    int num = 0;
 
-    do {
-    tmp[i] = interrupt(22,0,0,0,0);
-    if(tmp[i] == '\b') {
-              printString("\b \b", 0);
-
-              if(i > 0)
-                --i;
-                --i;
-        }
-        else {
-              al = tmp[i];
-              ah = 14;
-              ax = ah * 256 + al;
-              interrupt(16, ax, 0, 0, 0);
-          }
-    } while (tmp[i++] != 13);
-
-    tmp[i-1] = '\0';
-    printString("\n\r\0",0);
-
-    while (j < (i -1)) {
-
-        num = num * 10;
-        num = num + (tmp[j++] - '0');
-    }
-
-    *n = num;
-
-
-}
-
-*/
 void writeInt(int x, int print)
 {
     int i = 0;

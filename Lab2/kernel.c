@@ -119,6 +119,20 @@ void clearScreen()
     }
 }
 
+int mod(int a, int b)
+{
+    int x = a;
+    while (x >= b) x = x - b;
+    return x;
+}
+
+int div(int a, int b)
+{
+    int q = 0;
+    while (q * b <= a) ++q;
+    return (q - 1);
+}
+
 void readString(char* c, int size)
 {
     char temp;
@@ -145,26 +159,13 @@ void readString(char* c, int size)
     return;
 }
 
-int mod(int a, int b)
-{
-    int x = a;
-    while (x >= b) x = x - b;
-    return x;
-}
-
-int div(int a, int b)
-{
-    int q = 0;
-    while (q * b <= a) ++q;
-    return (q - 1);
-}
-
 void readInt(int* n)
 {
     int i = 0, LEN = 0;
+
     char c[80];
     *n = 0;
-    readString(c);
+    readString(*c);
     while(c[LEN] != 0)
     {
         LEN++;
@@ -208,19 +209,10 @@ void readInt(int* n) {
 
     do {
     tmp[i] = interrupt(22,0,0,0,0);
-    if(tmp[i] == '\b') {
-              printString("\b \b", 0);
-
-              if(i > 0)
-                --i;
-                --i;
-        }
-        else {
-              al = tmp[i];
-              ah = 14;
-              ax = ah * 256 + al;
-              interrupt(16, ax, 0, 0, 0);
-          }
+    al = tmp[i];
+    ah = 14;
+    ax = ah * 256 + al;
+    interrupt(16, ax, 0, 0, 0);
     } while (tmp[i++] != 13);
 
     tmp[i-1] = '\0';

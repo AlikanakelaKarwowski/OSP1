@@ -165,7 +165,7 @@ void readInt(int* n)
 
     char c[80];
     *n = 0;
-    readString(*c);
+    readString(c);
     while(c[LEN] != 0)
     {
         LEN++;

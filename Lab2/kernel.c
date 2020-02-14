@@ -161,21 +161,63 @@ int div(int a, int b)
 
 void readInt(int* n)
 {
-    int i;
+    int i,num;
     char c[80];
+    *n = 0;
+    /*num = 0;*/
     readString(c);
 
     /* wont compile when i is declared inside for loop */
     for(i = 0; c[i] != 0x0; ++i)
     {
       *n *= 10;
-      *n += c[i] - '0';
+      *n += c[i] - 48;
     }
 
     return;
 }
 
+/*
+void readInt(int* n) {
+    int i = 0;
+    int j = 0;
+    char al;
+    char ah;
+    int ax;
+    char* tmp;
+    int num = 0;
 
+    do {
+    tmp[i] = interrupt(22,0,0,0,0);
+    if(tmp[i] == '\b') {
+              printString("\b \b", 0);
+
+              if(i > 0)
+                --i;
+                --i;
+        }
+        else {
+              al = tmp[i];
+              ah = 14;
+              ax = ah * 256 + al;
+              interrupt(16, ax, 0, 0, 0);
+          }
+    } while (tmp[i++] != 13);
+
+    tmp[i-1] = '\0';
+    printString("\n\r\0",0);
+
+    while (j < (i -1)) {
+
+        num = num * 10;
+        num = num + (tmp[j++] - '0');
+    }
+
+    *n = num;
+
+
+}
+*/
 void writeInt(int x, int print)
 {
     int i = 0;

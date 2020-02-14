@@ -161,19 +161,38 @@ int div(int a, int b)
 
 void readInt(int* n)
 {
-    int i,num;
+    int i = 0, LEN = 0;
     char c[80];
     *n = 0;
-    /*num = 0;*/
     readString(c);
+    while(c[LEN] != 0)
+    {
+        LEN++;
+    }
+    if(LEN > 5)
+    {
+        while(i < 5)
+        {
 
-    /* wont compile when i is declared inside for loop */
+          *n = *n * 10;
+          *n = *n + (c[i] - '0');
+          i++;
+        }
+    }else{
+
+        while(i < LEN)
+        {
+          *n = *n * 10;
+          *n = *n + (c[i] - '0');
+          i++;
+        }
+    }
+    /* wont compile when i is declared inside for loop
     for(i = 0; c[i] != 0x0; ++i)
     {
-      *n *= 10;
-      *n += c[i] - 48;
-    }
-
+      *n = *n * 10;
+      *n = *n + (c[i] - '0');
+    }*/
     return;
 }
 
@@ -214,8 +233,6 @@ void readInt(int* n) {
     }
 
     *n = num;
-
-
 }
 */
 void writeInt(int x, int print)

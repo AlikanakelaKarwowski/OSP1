@@ -128,34 +128,23 @@ void readString(char* c, int size)
     char ah;
     int ax;
     int index;
-    int flag;
-    flag = 0;
-
-    while(flag != 1)
+    
+    while(temp != 0xd)
     {
         temp = interrupt(22,0,0,0);
-        if(temp == 0x8 && index >= 0)
-        {
-            --index;
-        }
-
-        if(temp == 0xd)
-        {
-            c[size-1] = 0x0;
-            flag = 1;
-            return;
-        }
-
         c[index] = temp;
         ++index;
         al = temp;
         ah = 14;
         ax = ah * 256 + al;
         interrupt(16,ax,0,0,0);
+        if(temp == 0x8 && index >= 0)
+        {
+            --index;
+        }
     }
+    c[index-1] = 0x0;
     return;
-
-
 }
 
 int mod(int a, int b)

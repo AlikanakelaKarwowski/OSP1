@@ -28,4 +28,9 @@ echo "c" | bochs -f bdos.txt
 
 * Click the “power button” in bochs to close the emulator
 
+```
+dd if=floppya.img of=config bs=512 skip=258 count=1conv=notrunc
+hexdump -C config
+```
+To save the changes made to disk sectors
 This concludes everything that you need to do to run the project and confirm that it is working correctly

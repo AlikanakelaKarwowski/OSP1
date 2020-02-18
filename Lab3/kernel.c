@@ -39,6 +39,7 @@ void writeSector(char* , int , int);
 /* Mad Lib kernel.c - c. 2018 O'Neil */
 void main()
 {
+    int i;
     char buffer[512];
     makeInterrupt21();
     for (i = 0; i < 512; i++)
@@ -97,7 +98,7 @@ void clearScreen(int bx,int cx)
     }
     interrupt(16,512,0,0,0);
     if(bx >0 && cx > 0)
-        interrupt(16, 1536, 4096 * (bx–1)+ 256 * (cx–1), 0, 6223)
+        interrupt(16, 1536, 4096 * (bx–1)+ 256 * (cx–1), 0, 6223);
 }
 
 int mod(int a, int b)

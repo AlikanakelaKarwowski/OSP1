@@ -32,6 +32,8 @@ int mod(int, int);
 int div(int, int);
 void readInt(int* n);
 void writeInt(int, int);
+void readSector(char* , int, int)
+void writeSector(char* , int , int)
 
 
 /* Mad Lib kernel.c - c. 2018 O'Neil */
@@ -204,6 +206,14 @@ void readSector(char* buffer, int sector, int sectorCount)
 
 }
 
+void writeSector(char* buffer, int sector, int sectorCount)
+{
+    int AX = 768 + sectorCount;
+    int CX = 256 * div(sector, 36) + (mod(sector, 18) + 1);
+    int DX = mod(div(sector, 18), 2) * 256;
+    interrupt(19,AX,buffer,CX,DX);
+}
+
 /* MAKE FUTURE UPDATES HERE */
 /* VVVVVVVVVVVVVVVVVVVVVVVV */
 
@@ -227,7 +237,7 @@ void handleInterrupt21(int ax, int bx, int cx, int dx)
             readSector(bx, cx, dx);
             break;
         case 6:
-            //writeSector(bx, cx, dx);
+            writeSector(bx, cx, dx);
             break;
         case 12:
             //clearScreen(bx, cx);

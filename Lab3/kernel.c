@@ -32,8 +32,8 @@ int mod(int, int);
 int div(int, int);
 void readInt(int* n);
 void writeInt(int, int);
-void readSector(char* , int, int)
-void writeSector(char* , int , int)
+void readSector(char* , int, int);
+void writeSector(char* , int , int);
 
 
 /* Mad Lib kernel.c - c. 2018 O'Neil */

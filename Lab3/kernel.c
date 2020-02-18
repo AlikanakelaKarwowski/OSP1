@@ -1,4 +1,4 @@
-﻿/* ACADEMIC INTEGRITY PLEDGE                                              */
+/* ACADEMIC INTEGRITY PLEDGE                                              */
 /*                                                                        */
 /* - I have not used source code obtained from another student nor        */
 /*   any other unauthorized source, either modified or unmodified.        */
@@ -37,46 +37,48 @@ void writeInt(int, int);
 /* Mad Lib kernel.c - c. 2018 O'Neil */
 void main()
 {
-   char food[25], adjective[25], color[25], animal[25];
-   int temp;
-   makeInterrupt21();
-   printLogo();
-   interrupt(33,0,"\r\nWelcome to the Mad Libs kernel.\r\n\0",0,0);
-   interrupt(33,0,"\r\nEnter a food: \0",0,0);
-   interrupt(33,1,food,0,0);
-   temp = 0;
-   while ((temp < 100) || (temp > 120)) {
-      interrupt(33,0,"Enter a number between 100 and 120: \0",0,0);
-      interrupt(33,14,&temp,0,0);
-   }
-   interrupt(33,0,"\r\nEnter an adjective: \0",0,0);
-   interrupt(33,1,adjective,0,0);
-   interrupt(33,0,"\r\nEnter a color: \0",0,0);
-   interrupt(33,1,color,0,0);
-   interrupt(33,0,"\r\nEnter an animal: \0",0,0);
-   interrupt(33,1,animal,0,0);
-   interrupt(33,0,"\r\nYour note is on the printer, go get it.\r\n\0",0,0);
-   interrupt(33,0,"Dear Professor O\'Neil,\r\n\0",1,0);
-   interrupt(33,0,"\r\nI am so sorry that I am unable to turn in my program at this time.\r\n\0",1,0);
-   interrupt(33,0,"First, I ate a rotten \0",1,0);
-   interrupt(33,0,food,1,0);
-   interrupt(33,0,", which made me turn \0",1,0);
-   interrupt(33,0,color,1,0);
-   interrupt(33,0," and extremely ill.\r\n\0",1,0);
-   interrupt(33,0,"I came down with a fever of \0",1,0);
-   interrupt(33,13,temp,1,0);
-   interrupt(33,0,". Next my \0",1,0);
-   interrupt(33,0,adjective,1,0);
-   interrupt(33,0," pet \0",1,0);
-   interrupt(33,0,animal,1,0);
-   interrupt(33,0," must have\r\nsmelled the remains of the \0",1,0);
-   interrupt(33,0,food,1,0);
-   interrupt(33,0," on my computer, because he ate it. I am\r\n\0",1,0);
-   interrupt(33,0,"currently rewriting the program and hope you will accept it late.\r\n\0",1,0);
-   interrupt(33,0,"\r\nSincerely,\r\n\0",1,0);
-   interrupt(33,0,"(Chayton, Alex, Dominic)\r\n\0",1,0);
-   while(1);
+    char food[25], adjective[25], color[25], animal[25];
+    int temp;
+    makeInterrupt21();
+    printLogo();
+    interrupt(33,0,"\r\nWelcome to the Mad Libs kernel.\r\n\0",0,0);
+    interrupt(33,0,"\r\nEnter a food: \0",0,0);
+    interrupt(33,1,food,0,0);
+    temp = 0;
+    while ((temp < 100) || (temp > 120))
+    {
+        interrupt(33,0,"Enter a number between 100 and 120: \0",0,0);
+        interrupt(33,14,&temp,0,0);
+    }
+    interrupt(33,0,"\r\nEnter an adjective: \0",0,0);
+    interrupt(33,1,adjective,0,0);
+    interrupt(33,0,"\r\nEnter a color: \0",0,0);
+    interrupt(33,1,color,0,0);
+    interrupt(33,0,"\r\nEnter an animal: \0",0,0);
+    interrupt(33,1,animal,0,0);
+    interrupt(33,0,"\r\nYour note is on the printer, go get it.\r\n\0",0,0);
+    interrupt(33,0,"Dear Professor O\'Neil,\r\n\0",1,0);
+    interrupt(33,0,"\r\nI am so sorry that I am unable to turn in my program at this time.\r\n\0",1,0);
+    interrupt(33,0,"First, I ate a rotten \0",1,0);
+    interrupt(33,0,food,1,0);
+    interrupt(33,0,", which made me turn \0",1,0);
+    interrupt(33,0,color,1,0);
+    interrupt(33,0," and extremely ill.\r\n\0",1,0);
+    interrupt(33,0,"I came down with a fever of \0",1,0);
+    interrupt(33,13,temp,1,0);
+    interrupt(33,0,". Next my \0",1,0);
+    interrupt(33,0,adjective,1,0);
+    interrupt(33,0," pet \0",1,0);
+    interrupt(33,0,animal,1,0);
+    interrupt(33,0," must have\r\nsmelled the remains of the \0",1,0);
+    interrupt(33,0,food,1,0);
+    interrupt(33,0," on my computer, because he ate it. I am\r\n\0",1,0);
+    interrupt(33,0,"currently rewriting the program and hope you will accept it late.\r\n\0",1,0);
+    interrupt(33,0,"\r\nSincerely,\r\n\0",1,0);
+    interrupt(33,0,"(Chayton, Alex, Dominic)\r\n\0",1,0);
+    while(1);
 }
+
 void printString(char* c, int d)
 {
     if(d ==1)
@@ -124,24 +126,23 @@ void clearScreen()
 int mod(int a, int b)
 {
     int x = a;
-    while (x >= b) x = x - b;
+    while (x >= b)
+        x = x - b;
     return x;
 }
 
 int div(int a, int b)
 {
     int q = 0;
-    while (q * b <= a) ++q;
+    while (q * b <= a)
+        ++q;
     return (q - 1);
 }
 
 void readString(char* c, int size)
 {
-    char temp;
-    char al;
-    char ah;
-    int ax;
-    int index;
+    char temp, al, ah;
+    int ax, index;
 
     while(temp != 0xd)
     {
@@ -152,6 +153,7 @@ void readString(char* c, int size)
         ah = 14;
         ax = ah * 256 + al;
         interrupt(16,ax,0,0,0);
+
         if(temp == 0x8 && index >= 0)
         {
             --index;
@@ -163,15 +165,9 @@ void readString(char* c, int size)
 
 void readInt(int* n)
 {
-    int i = 0, length = 0, num = 0;
-    int ax;
-
-    char temp;
-    char al;
-    char ah;
-
+    int i = 0, length = 0, num = 0, ax;
+    char temp, al, ah;
     char *c;
-
 
     while(temp != 0xd)
     {
@@ -182,6 +178,7 @@ void readInt(int* n)
         ah = 14;
         ax = ah * 256 + al;
         interrupt(16,ax,0,0,0);
+
         if(temp == 0x8 && i >= 0)
         {
             --i;
@@ -201,11 +198,10 @@ void readInt(int* n)
 
 void writeInt(int x, int print)
 {
-    int i = 0;
-    int k = 0;
-    char temp[6];
-    char store[6];
+    int i = 0, k = 0;
+    char temp[6], store[6];
     char p;
+
     if(x == 0)
     {
         store[0] = '0';
@@ -265,5 +261,5 @@ void handleInterrupt21(int ax, int bx, int cx, int dx)
         default:
             interrupt(33,0,"General BlackDOS error.\r\n\0",0,0);
             break;
-    }
+}
 }

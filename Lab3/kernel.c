@@ -195,7 +195,7 @@ void writeInt(int x, int print)
     return;
 }
 
-void readSectors(char* buffer, int sector, int sectorCount)
+void readSector(char* buffer, int sector, int sectorCount)
 {
     int AX = 512 + sectorCount;
     int CX = 256 * div(sector, 36) + (mod(sector, 18) + 1);
@@ -244,5 +244,5 @@ void handleInterrupt21(int ax, int bx, int cx, int dx)
         default:
             interrupt(33,0,"General BlackDOS error.\r\n\0",0,0);
             break;
-}
+    }
 }

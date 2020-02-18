@@ -227,10 +227,10 @@ void handleInterrupt21(int ax, int bx, int cx, int dx)
             readSector(bx, cx, dx);
             break;
         case 6:
-            writeSector(bx, cx, dx);
+            //writeSector(bx, cx, dx);
             break;
         case 12:
-            clearScreen(bx, cx);
+            //clearScreen(bx, cx);
             break;
         case 13:
             writeInt(bx, cx);

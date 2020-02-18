@@ -44,7 +44,7 @@ void main()
     makeInterrupt21();
     for (i = 0; i < 512; i++)
         buffer[i] = 0;
-    buffer[0] = 1;
+    buffer[0] = 0;
     buffer[1] = 11;
     interrupt(33,6,buffer,258,1);
     interrupt(33,12,buffer[0]+1,buffer[1]+1,0);
@@ -98,7 +98,10 @@ void clearScreen(int bx,int cx)
     }
     interrupt(16,512,0,0,0);
     if(bx >0 && cx > 0)
-        interrupt(16, 1536, 4096 * (bx-1)+ 256 * (cx-1), 0, 6223);
+        if(bx >8 || cx >16)
+            return;
+        else
+            interrupt(16, 1536, 4096 * (bx-1)+ 256 * (cx-1), 0, 6223);
 }
 
 int mod(int a, int b)

@@ -26,7 +26,7 @@
 
 void handleInterrupt21(int,int,int,int);
 void printLogo();
-void clearScreen();
+void clearScreen(int, int);
 void readString(char*, int);
 int mod(int, int);
 int div(int, int);
@@ -41,6 +41,12 @@ void main()
 {
     char buffer[512];
     makeInterrupt21();
+    for (i = 0; i < 512; i++)
+        buffer[i] = 0;
+    buffer[0] = 1;
+    buffer[1] = 11;
+    interrupt(33,6,buffer,258,1);
+    interrupt(33,12,buffer[0]+1,buffer[1]+1,0);
     printLogo();
     interrupt(33,2,buffer,30,1);
     interrupt(33,0,buffer,0,0);
@@ -80,7 +86,7 @@ void printLogo()
     interrupt(33,0," Author(s): Chayton, Dominic, and Alex.\r\n\r\n\0",0,0);
 }
 
-void clearScreen()
+void clearScreen(int bx,int cx)
 {
     int i = 0;
     while(i <=24)
@@ -89,6 +95,9 @@ void clearScreen()
         interrupt(33,0,"\n",0,0);
         ++i;
     }
+    interrupt(16,512,0,0,0);
+    if(bx >0 && cx > 0)
+        interrupt(16, 1536, 4096 * (bx–1)+ 256 * (cx–1), 0, 6223)
 }
 
 int mod(int a, int b)
@@ -240,7 +249,7 @@ void handleInterrupt21(int ax, int bx, int cx, int dx)
             writeSector(bx, cx, dx);
             break;
         case 12:
-            //clearScreen(bx, cx);
+            clearScreen(bx, cx);
             break;
         case 13:
             writeInt(bx, cx);

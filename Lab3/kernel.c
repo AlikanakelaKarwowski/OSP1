@@ -76,7 +76,7 @@ void printString(char* c, int d)
             c++;
         }
 
-    /*add new line and return carrage*/
+    /*add new line and return carrage return if one is not in the string*/
     if (rc !=1)
     {
         al = '\r';
@@ -87,9 +87,6 @@ void printString(char* c, int d)
         ax = ah * 256 + al;
         interrupt(16, ax, 0, 0, 0);
     }
-    /*interrupt(16,'\r',0,0,0);
-    interrupt(16,'\n',0,0,0);
-     fill this in */
     return;
 }
 

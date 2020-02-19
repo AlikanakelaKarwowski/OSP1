@@ -71,10 +71,10 @@ void printString(char* c, int d)
             interrupt(16, ax, 0, 0, 0);
             c++;
         }
-    /*add new line and return carrage*/
+    /*add new line and return carrage
     interrupt(16,'\r',0,0,0);
     interrupt(16,'\n',0,0,0);
-    /* fill this in */
+     fill this in */
     return;
 }
 

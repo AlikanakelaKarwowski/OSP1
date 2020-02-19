@@ -56,6 +56,8 @@ void main()
 
 void printString(char* c, int d)
 {
+    char al, ah;
+    int ax;
     if(d ==1)
         while(*c != '\0')
         {
@@ -65,23 +67,21 @@ void printString(char* c, int d)
     else
         while(*c != '\0')
         {
-            char al = *c;
-            char ah = 14;
-            int ax = ah * 256 + al;
+            al = *c;
+            ah = 14;
+            ax = ah * 256 + al;
             interrupt(16, ax, 0, 0, 0);
             c++;
         }
 
     /*add new line and return carrage*/
-    {
-        char al = '\r';
-        char ah = 14;
-        int ax = ah * 256 + al;
+        al = '\r';
+        ah = 14;
+        ax = ah * 256 + al;
         interrupt(16, ax, 0, 0, 0);
         al = '\n';
         ax = ah * 256 + al;
         interrupt(16, ax, 0, 0, 0);
-    }
 
     /*interrupt(16,'\r',0,0,0);
     interrupt(16,'\n',0,0,0);

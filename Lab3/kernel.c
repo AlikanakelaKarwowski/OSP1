@@ -77,7 +77,7 @@ void printString(char* c, int d)
         }
 
     /*add new line and return carrage return if one is not in the string*/
-    if (rc !=1)
+    if (rc == 0)
     {
         al = '\r';
         ah = 14;

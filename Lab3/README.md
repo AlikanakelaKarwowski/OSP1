@@ -24,7 +24,7 @@ cd Lab3/
 sh compileOS.sh
 echo "c" | bochs -f bdos.txt
 ```
-* At this point the emulator should run and print out to the screen the BlackDOS logo and prints out soft kitty from the msg file.
+* At this point the emulator should run and print out to the screen the BlackDOS logo (in light cyan color) and prints out soft kitty from the msg file.
 
 * Click the “power button” in bochs to close the emulator
 

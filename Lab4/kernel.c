@@ -34,7 +34,7 @@ void readInt(int* n);
 void writeInt(int, int);
 void readSector(char* , int, int);
 void writeSector(char* , int , int);
-
+void runProgram(int, int, int);
 
 /* Mad Lib kernel.c - c. 2018 O'Neil */
 void main()
@@ -42,8 +42,10 @@ void main()
     int i;
     char buffer[512];
     makeInterrupt21();
+
     for (i = 0; i < 512; i++)
         buffer[i] = 0;
+
     buffer[0] = 0;
     buffer[1] = 11;
     interrupt(33,6,buffer,258,1);
@@ -228,6 +230,15 @@ void writeSector(char* buffer, int sector, int sectorCount)
     interrupt(19,AX,buffer,CX,DX);
 }
 
+void runProgram(int start, int size, int segment)
+{
+    int baseLocation = segment * 4096, i = 0;
+    char buffer[13312];
+    readSector(buffer,sector, 13312);
+    for(i = 0; i <= 13312; i +=1)
+        putInMemory(baseLocation, 0, buffer[i]);
+    launchProgram(baseLocation);
+}
 /* MAKE FUTURE UPDATES HERE */
 /* VVVVVVVVVVVVVVVVVVVVVVVV */
 

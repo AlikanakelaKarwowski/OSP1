@@ -234,7 +234,7 @@ void runProgram(int start, int size, int segment)
 {
     int baseLocation = segment * 4096, i = 0;
     char buffer[13312];
-    readSector(buffer,sector, 13312);
+    readSector(buffer,segmentcl, 13312);
     for(i = 0; i <= 13312; i +=1)
         putInMemory(baseLocation, 0, buffer[i]);
     launchProgram(baseLocation);
@@ -242,7 +242,7 @@ void runProgram(int start, int size, int segment)
 /* MAKE FUTURE UPDATES HERE */
 /* VVVVVVVVVVVVVVVVVVVVVVVV */
 
-/*126b2b3173821b589fdf24173afe57269bcdbca5*/
+/*atom://teletype/portal/70418acb-7635-42f6-aa93-33fa599cb4ac
 
 /* ^^^^^^^^^^^^^^^^^^^^^^^^ */
 /* MAKE FUTURE UPDATES HERE */

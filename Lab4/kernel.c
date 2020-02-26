@@ -232,6 +232,8 @@ void runProgram(int start, int size, int segment)
         putInMemory(baseLocation, i, buffer[i]);
     launchProgram(baseLocation);
 }
+
+void stop() { while(1);}
 /* MAKE FUTURE UPDATES HERE */
 /* VVVVVVVVVVVVVVVVVVVVVVVV */
 
@@ -253,6 +255,9 @@ void handleInterrupt21(int ax, int bx, int cx, int dx)
             break;
         case 2:
             readSector(bx, cx, dx);
+            break;
+        case 5:
+            stop();
             break;
         case 6:
             writeSector(bx, cx, dx);

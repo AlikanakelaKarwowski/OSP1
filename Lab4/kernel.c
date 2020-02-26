@@ -36,23 +36,16 @@ void readSector(char* , int, int);
 void writeSector(char* , int , int);
 void runProgram(int, int, int);
 
-/* Mad Lib kernel.c - c. 2018 O'Neil */
 void main()
 {
     int i;
     char buffer[512];
     makeInterrupt21();
-
-    for (i = 0; i < 512; i++)
-        buffer[i] = 0;
-
-    buffer[0] = 0;
-    buffer[1] = 11;
-    interrupt(33,6,buffer,258,1);
+    interrupt(33,2,buffer,258,1);
     interrupt(33,12,buffer[0]+1,buffer[1]+1,0);
     printLogo();
-    interrupt(33,2,buffer,30,1);
-    interrupt(33,0,buffer,0,0);
+    runProgram(30,1,2);
+    interrupt(33,0,"Error if this executes.\r\n\0",0,0);
     while(1);
 }
 
@@ -234,9 +227,9 @@ void runProgram(int start, int size, int segment)
 {
     int baseLocation = segment * 4096, i = 0;
     char buffer[13312];
-    readSector(buffer,segmentcl, 13312);
+    readSector(buffer,start, size);
     for(i = 0; i <= 13312; i +=1)
-        putInMemory(baseLocation, 0, buffer[i]);
+        putInMemory(baseLocation, i, buffer[i]);
     launchProgram(baseLocation);
 }
 /* MAKE FUTURE UPDATES HERE */

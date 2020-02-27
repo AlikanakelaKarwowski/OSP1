@@ -4,23 +4,21 @@ Alex Karwowski, Chayton Hamric, Dominic Cumba
 Date: 2/21/20
 
 # What we did:
-* Created **readSectors()**, **writeSectors()**, and edited **clearScreen()**
+* Created **runProgram()** and edited **stop()**
 
-* **readSectors()**, Reads from file
+* **runProgram()** calls **readSectors()** to load the file into the local buffer, load the file into memory, and calls **launchProgram()**
 
-* **writeSectors()**, Writes to file
-
-* Included msg and config
+* **stop()** hangs the computer when the program finishes
 
 # How to verify the project works
 
 Run the following commands in order:
 
 * Open xterm or other terminal that can run x server programs
-* cd into the directory of the Lab3 folder
+* cd into the directory of the Lab4 folder
 
 ```
-cd Lab3/
+cd Lab4/
 sh compileOS.sh
 echo "c" | bochs -f bdos.txt
 ```

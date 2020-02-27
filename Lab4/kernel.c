@@ -237,7 +237,6 @@ void stop() { while(1);}
 /* MAKE FUTURE UPDATES HERE */
 /* VVVVVVVVVVVVVVVVVVVVVVVV */
 
-/*atom://teletype/portal/70418acb-7635-42f6-aa93-33fa599cb4ac
 
 /* ^^^^^^^^^^^^^^^^^^^^^^^^ */
 /* MAKE FUTURE UPDATES HERE */

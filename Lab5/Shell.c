@@ -66,9 +66,9 @@ void main()
         PRINTS("~(__^> ");
         SCANS(input);
         PRINTS("\r\n\0");
-        int cmd;
-        cmd = CommandHandler(input);
-        switch(cmd)
+        int control;
+        control = CommandHandler(input);
+        switch(control)
         {
             case 1:
                 PRINTS("Rebooting ...");

@@ -22,7 +22,9 @@ void echo(){
 void main()
 {
     int True = 1;
-    char input[55];
+    while(True == 1){
+        char input[55];
         PRINTS("~(__^> ");
         SCANS(input);
+    }
 }

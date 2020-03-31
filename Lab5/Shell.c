@@ -10,13 +10,13 @@ int CommandHandler(char *c );
 
 void main()
 {
-    int True = 1;
+    int True = 1, control;
     while(True == 1){
         char input[55];
         PRINTS("~(__^> ");
         SCANS(input);
         PRINTS("\r\n\0");
-        int control;
+
         control = CommandHandler(input);
         switch(control)
         {

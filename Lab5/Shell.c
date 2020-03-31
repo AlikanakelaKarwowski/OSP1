@@ -5,7 +5,9 @@
 #define SCANS(x)   interrupt(33,1,x,0,0)
 #define SCANN(x)   interrupt(33,14,&x,0,0)
 #define END        interrupt(33,5,0,0,0)
-
+typedef int bool;
+#define true 1
+#define false 0
 /*void boot(){
     interrupt(25,0,0,0,0);
 }
@@ -18,10 +20,12 @@ void echo(){
     SCANS(x);
 }
 */
+
 void main()
 {
+    bool x = true;
     char input[55];
-    while (true)
+    while (x);
     {
         PRINTS("~(__^> ");
         SCANS(input);

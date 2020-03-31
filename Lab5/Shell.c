@@ -11,8 +11,9 @@
 void main()
 {
     int True = 1, control = 0;
+    char input[512],buffer[512];
     while(True == 1){
-        char input[55];
+
         PRINTS("~(__^> ");
         SCANS(input);
         PRINTS("\r\n\0");
@@ -204,3 +205,15 @@ switch(control)
 
 }
 */
+int strcmp(char* str1, char* str2)
+{
+   while(*str1 != '\0' && *str1 != ' ')
+   {
+      if(*str1 != *str2)
+         return 0;
+
+      *str1++;
+      *str2++;
+   }
+   return 1;
+}

@@ -6,7 +6,7 @@
 #define SCANN(x)   interrupt(33,14,&x,0,0)
 #define END        interrupt(33,5,0,0,0)
 
-int CommandHandler(char c[]);
+/* int CommandHandler(char c[]); */
 
 void main()
 {
@@ -16,58 +16,93 @@ void main()
         PRINTS("~(__^> ");
         SCANS(input);
         PRINTS("\r\n\0");
+
+        /* boot */
         if (input[0] == 'b' && input[1] == 'o' && input[2] == 'o' && input[3] == 't')
             {PRINTS("Rebooting ...");
             PRINTS("\r\n\0");
-            break;}
+            break;
+        }
 
-        /* clrs
-        else if (input[0] == 'c' && input[1] == 'l' && input[2] == 'r' && input[3] == 's')
-            {return 2;}
+        /* clrs */
+        else if (input[0] == 'c' && input[1] == 'l' && input[2] == 'r' && input[3] == 's'){
+            PRINTS("clear screen ...");
+            PRINTS("\r\n\0");
+            break;
+        }
 
-        /* echo
-        else if (input[0] == 'e' && input[1] == 'c' && input[2] == 'h' && input[3] == 'o')
-            {return 3;}
+        /* echo */
+        else if (input[0] == 'e' && input[1] == 'c' && input[2] == 'h' && input[3] == 'o'){
+            PRINTS("echo ...");
+            PRINTS("\r\n\0");
+            break;
+        }
 
-        /* copy
-        else if (input[0] == 'c' && input[1] == 'o' && input[2] == 'p' && input[3] == 'y')
-            {return 4;}
+        /* copy */
+        else if (input[0] == 'c' && input[1] == 'o' && input[2] == 'p' && input[3] == 'y'){
+            PRINTS("copy ...");
+            PRINTS("\r\n\0");
+            break;
+        }
 
-        /* ddir
+        /* ddir */
         else if (input[0] == 'd' && input[1] == 'd' && input[2] == 'i' && input[3] == 'r')
-            {return 5;}
+            {PRINTS("d directory ...");
+            PRINTS("\r\n\0");
+            break;
+        }
 
-        /* exec
+        /* exec */
         else if (input[0] == 'e' && input[1] == 'x' && input[2] == 'e' && input[3] == 'c')
-            {return 6;}
+            {PRINTS("execute ...");
+            PRINTS("\r\n\0");
+            break;
+        }
 
-        /* help
+        /* help */
         else if (input[0] == 'h' && input[1] == 'e' && input[2] == 'l' && input[3] == 'p')
-            {return 7;}
+            {PRINTS("help me ...");
+            PRINTS("\r\n\0");
+            break;
+        }
 
-        /* prnt
-        else if (input[0] == 'p' && input[1] == 'r' && input[2] == 'n' && input[3] == 't')
-            {return 8;}
+        /* prnt */
+        else if (input[0] == 'p' && input[1] == 'r' && input[2] == 'n' && input[3] == 't'){
+            PRINTS("execute ...");
+            PRINTS("\r\n\0");
+            break;
+        }
 
-        /* remv
-        else if (input[0] == 'r' && input[1] == 'e' && input[2] == 'm' && input[3] == 'v')
-            {return 9;}
+        /* remv */
+        else if (input[0] == 'r' && input[1] == 'e' && input[2] == 'm' && input[3] == 'v'){
+            PRINTS("remove ...");
+            PRINTS("\r\n\0");
+            break;
+        }
 
-        /* senv
-        else if (input[0] == 's' && input[1] == 'e' && input[2] == 'n' && input[3] == 'v')
-            {return 10;}
+        /* senv */
+        else if (input[0] == 's' && input[1] == 'e' && input[2] == 'n' && input[3] == 'v'){
+            PRINTS("senv??? ...");
+            PRINTS("\r\n\0");
+            break;
+        }
 
-        /* show
-        else if (input[0] == 's' && input[1] == 'h' && input[2] == 'o' && input[3] == 'w')
-            {return 11;}
+        /* show */
+        else if (input[0] == 's' && input[1] == 'h' && input[2] == 'o' && input[3] == 'w'){
+            PRINTS("show ...");
+            PRINTS("\r\n\0");
+            break;
+        }
 
-        /* twet
-        else if (input[0] == 't' && input[1] == 'w' && input[2] == 'e' && input[3] == 't')
-            {return 12;}
-            */
-
+        /* twet */
+        else if (input[0] == 't' && input[1] == 'w' && input[2] == 'e' && input[3] == 't'){
+            PRINTS("twat waffle ...");
+            PRINTS("\r\n\0");
+            break;
+        }
     }
-}
+
+};
 /*
 int CommandHandler(char c[55] ){
     /* boot

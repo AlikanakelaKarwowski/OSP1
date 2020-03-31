@@ -66,7 +66,8 @@ void main()
         PRINTS("~(__^> ");
         SCANS(input);
         PRINTS("\r\n\0");
-        int cmd = Command(input);
+        int cmd;
+        cmd = CommandHandler(input);
         switch(cmd)
         {
             case 1:

@@ -26,5 +26,6 @@ void main()
         char input[55];
         PRINTS("~(__^> ");
         SCANS(input);
+        PRINTS("\r\n\0");
     }
 }

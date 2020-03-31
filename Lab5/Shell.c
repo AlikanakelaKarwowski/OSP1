@@ -25,34 +25,34 @@ void main()
         }
 
         /* clrs */
-        else if (input[0] == 'c' && input[1] == 'l' && input[2] == 'r' && input[3] == 's'){
+        if (input[0] == 'c' && input[1] == 'l' && input[2] == 'r' && input[3] == 's'){
             PRINTS("clear screen ...");
             PRINTS("\r\n\0");
             break;
         }
 
         /* echo */
-        else if (input[0] == 'e' && input[1] == 'c' && input[2] == 'h' && input[3] == 'o'){
+        if (input[0] == 'e' && input[1] == 'c' && input[2] == 'h' && input[3] == 'o'){
             PRINTS("echo ...");
             PRINTS("\r\n\0");
             break;
         }
 
-        /* copy
-        else if (input[0] == 'c' && input[1] == 'o' && input[2] == 'p' && input[3] == 'y'){
+        /* copy */
+        if (input[0] == 'c' && input[1] == 'o' && input[2] == 'p' && input[3] == 'y'){
             PRINTS("copy ...");
             PRINTS("\r\n\0");
             break;
-        }*/
+        }
 
-        /* ddir */
+        /* ddir 
         else if (input[0] == 'd' && input[1] == 'd' && input[2] == 'i' && input[3] == 'r')
             {PRINTS("d directory ...");
             PRINTS("\r\n\0");
             break;
         }
 
-        /* exec */
+        /* exec
         else if (input[0] == 'e' && input[1] == 'x' && input[2] == 'e' && input[3] == 'c')
             {PRINTS("execute ...");
             PRINTS("\r\n\0");

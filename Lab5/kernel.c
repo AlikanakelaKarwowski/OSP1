@@ -38,15 +38,14 @@ void runProgram(int, int, int);
 
 void main()
 {
-    int i;
     char buffer[512];
     makeInterrupt21();
     interrupt(33,2,buffer,258,1);
     interrupt(33,12,buffer[0]+1,buffer[1]+1,0);
     printLogo();
-    runProgram(30,1,2);
-    interrupt(33,0,"Error if this executes.\r\n\0",0,0);
-    while(1);
+    runProgram(30,10,2);
+    interrupt(33,0,"Bad or Missing Command Interpreter.\r\n\0",0,0);
+    while(1); 
 }
 
 void printString(char* c, int d)

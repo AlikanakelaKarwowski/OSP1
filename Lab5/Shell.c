@@ -23,10 +23,6 @@ void main()
 {
     int True = 1;
     char input[55];
-    while (True);
-    {
         PRINTS("~(__^> ");
         SCANS(input);
-
-    }
 }

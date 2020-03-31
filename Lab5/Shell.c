@@ -6,7 +6,7 @@
 #define SCANN(x)   interrupt(33,14,&x,0,0)
 #define END        interrupt(33,5,0,0,0)
 
-int CommandHandler(char *c);
+int CommandHandler(char c[]);
 
 void main()
 {
@@ -79,7 +79,7 @@ void main()
     }
 }
 
-int CommandHandler(char *c ){
+int CommandHandler(char c[55] ){
     /* boot */
     if (c[0] == 'b' && c[1] == 'o' && c[2] == 'o' && c[3] == 't')
         {return 1;}

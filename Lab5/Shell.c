@@ -8,51 +8,51 @@
 
 int CommandHandler(char *c ){
     /* boot */
-    if (input[0] == 'b' && input[1] == 'o' && input[2] == 'o' && input[3] == 't')
+    if (c[0] == 'b' && c[1] == 'o' && c[2] == 'o' && c[3] == 't')
         {return 1;}
 
     /* clrs */
-    if (input[0] == 'c' && input[1] == 'l' && input[2] == 'r' && input[3] == 's')
+    else if (c[0] == 'c' && c[1] == 'l' && c[2] == 'r' && c[3] == 's')
         {return 2;}
 
     /* echo */
-    if (input[0] == 'e' && input[1] == 'c' && input[2] == 'h' && input[3] == 'o')
+    else if (c[0] == 'e' && c[1] == 'c' && c[2] == 'h' && c[3] == 'o')
         {return 3;}
 
     /* copy */
-    if (input[0] == 'c' && input[1] == 'o' && input[2] == 'p' && input[3] == 'y')
+    else if (c[0] == 'c' && c[1] == 'o' && c[2] == 'p' && c[3] == 'y')
         {return 4;}
 
     /* ddir */
-    if (input[0] == 'd' && input[1] == 'd' && input[2] == 'i' && input[3] == 'r')
+    else if (c[0] == 'd' && c[1] == 'd' && c[2] == 'i' && c[3] == 'r')
         {return 5;}
 
     /* exec */
-    if (input[0] == 'e' && input[1] == 'x' && input[2] == 'e' && input[3] == 'c')
+    else if (c[0] == 'e' && c[1] == 'x' && c[2] == 'e' && c[3] == 'c')
         {return 6;}
 
     /* help */
-    if (input[0] == 'h' && input[1] == 'e' && input[2] == 'l' && input[3] == 'p')
+    else if (c[0] == 'h' && c[1] == 'e' && c[2] == 'l' && c[3] == 'p')
         {return 7;}
 
     /* prnt */
-    if (input[0] == 'p' && input[1] == 'r' && input[2] == 'n' && input[3] == 't')
+    else if (c[0] == 'p' && c[1] == 'r' && c[2] == 'n' && c[3] == 't')
         {return 8;}
 
     /* remv */
-    if (input[0] == 'r' && input[1] == 'e' && input[2] == 'm' && input[3] == 'v')
+    else if (c[0] == 'r' && c[1] == 'e' && c[2] == 'm' && c[3] == 'v')
         {return 9;}
 
     /* senv */
-    if (input[0] == 's' && input[1] == 'e' && input[2] == 'n' && input[3] == 'v')
+    else if (c[0] == 's' && c[1] == 'e' && c[2] == 'n' && c[3] == 'v')
         {return 10;}
 
     /* show */
-    if (input[0] == 's' && input[1] == 'h' && input[2] == 'o' && input[3] == 'w')
+    else if (c[0] == 's' && c[1] == 'h' && c[2] == 'o' && c[3] == 'w')
         {return 11;}
 
     /* twet */
-    if (input[0] == 't' && input[1] == 'w' && input[2] == 'e' && input[3] == 't')
+    else if (c[0] == 't' && c[1] == 'w' && c[2] == 'e' && c[3] == 't')
         {return 12;}
 
 }

@@ -118,7 +118,7 @@ void main()
                 PRINTS("twat ...");
                 PRINTS("\r\n\0");
                 break;
-            case default:
+            default:
                 PRINTS("twat waffle ...");
                 PRINTS("\r\n\0");
                 break;

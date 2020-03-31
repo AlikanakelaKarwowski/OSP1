@@ -24,20 +24,20 @@ void main()
 
         /* clrs */
         if (input[0] == 'c' && input[1] == 'l' && input[2] == 'r' && input[3] == 's' ){
-            interrupt(32, 12, 0, 0, 0);
+            interrupt(33, 12, 0, 0, 0);
         }
 
         /* echo */
         if (input[0] == 'e' && input[1] == 'c' && input[2] == 'h' && input[3] == 'o' && input[4] == ' ' ){
             int i = 5;
-            for(i;i <=55; i++)
+            for(i;i <=54; i++)
                 {
                     PRINTS(input[i]);
                 }
             PRINTS("\r\n\0");
         }
 
-        /* copy 
+        /* copy
         if (input[0] == 'c' && input[1] == 'o' && input[2] == 'p' && input[3] == 'y' ){
             PRINTS("copy ...");
             PRINTS("\r\n\0");

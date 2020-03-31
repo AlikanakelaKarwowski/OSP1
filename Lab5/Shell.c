@@ -6,12 +6,12 @@
 #define SCANN(x)   interrupt(33,14,&x,0,0)
 #define END        interrupt(33,5,0,0,0)
 
-/*int CommandHandler(char *c);*/
+int CommandHandler(char *c);
 
 void main()
 {
     int True = 1, control = 0;
-    while(True == 1){
+    while(True == 1){\
         char input[55];
         PRINTS("~(__^> ");
         SCANS(input);

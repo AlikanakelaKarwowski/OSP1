@@ -6,17 +6,18 @@
 #define SCANN(x)   interrupt(33,14,&x,0,0)
 #define END        interrupt(33,5,0,0,0)
 
-int CommandHandler(char *c );
+int CommandHandler(char *c);
 
 void main()
 {
     int True = 1, control;
+    char input[55];
     while(True == 1){
-        char input[55];
+
         PRINTS("~(__^> ");
         SCANS(input);
         PRINTS("\r\n\0");
-
+        /*
         control = CommandHandler(input);
         switch(control)
         {
@@ -74,6 +75,7 @@ void main()
                 break;
 
         }
+        */
 
     }
 }

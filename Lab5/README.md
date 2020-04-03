@@ -1,17 +1,16 @@
 # Project Group:
 
-## Alex Karwowski, Chayton Hamric, Dominic Cumba
+## Chayton Hamric
 
-### Date: 2/26/20
+### Date: 4/3/2020
 
 ---
 
 # What we did:
-* Created **runProgram()** and created **stop()**
+* Created file **Shell.cpp**
 
-* **runProgram()** calls **readSectors()** to load the file into the local buffer, which then loads the file into memory via **putInMemory()**, and calls **launchProgram()** which runs the file in BlackDOS.
+* Created Shell command functions **boot**, **clrs**, **echo**, **copy**, **ddir**, **exec**, **help**, **prnt**, **remv**, **senv**, **show**, **twet**, and **exit()**
 
-* **stop()** hangs the computer when the program finishes
 
 ---
 
@@ -19,20 +18,24 @@
 
 Run the following commands in order:
 
-* Open xterm or other terminal that can run x server programs
-* Navigate to the directory which contains the `Lab4` folder
+* Open terminal
+* Navigate to the directory which contains the `Lab5` folder
 * Type the following commands into your terminal
 
 ```
-cd Lab4/
-sh compileOS.sh
-dd if=fib of=floppya.img bs=512 count=1 seek=30 conv=notrunc
-echo "c" | bochs -f bdos.txt
+cd Lab5/
+make all
+./Shell
 ```
-* At this point the emulator should run and print out to the screen the BlackDOS logo (in light cyan color) and loads the **fib** file.
-* It asks the user for the number of terms to print out. After entering a number hit the enter key and the **fib** file will print out that many terms of the fibonacci sequence.
 
-* Click the “power button” in bochs to close the emulator
+* At this point you should see the Shell program running. And any of the commands above are recognized by the Shell.
+* I am using make files and a cpp file because kernal.c doesn't work with the amount of commands saved which made the files too large.
+* Professor Oneil has told me to use a cpp file instead.
 
+* Once you are finished Type the following command to exit the shell
+
+```
+exit
+```
 ---
 This concludes everything that you need to do to run the project and confirm that it is working correctly

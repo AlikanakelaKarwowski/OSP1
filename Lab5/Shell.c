@@ -89,7 +89,7 @@ void main()
 
         /* twet */
         else if (input[0] == 't' && input[1] == 'w' && input[2] == 'e' && input[3] == 't' ){
-            PRINTS("twat waffle ...");
+            PRINTS("twet waffle ...");
             PRINTS("\r\n\0");
         }
     }
@@ -146,16 +146,3 @@ int CommandHandler(char c[55] ){
         {return 12;}
 
 };
-
-int strcmp(char* str1, char* str2)
-{
-   while(*str1 != '\0' && *str1 != ' ')
-   {
-      if(*str1 != *str2)
-         return 0;
-
-      *str1++;
-      *str2++;
-   }
-   return 1;
-}

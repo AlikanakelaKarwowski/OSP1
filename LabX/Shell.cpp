@@ -17,8 +17,6 @@ int main()
 {
     int control = 0;
     std::string input;
-    char *args[1][1];
-    args[0][0]='\0';
     while(true){
 
         std::cout << "~(__^> ";
@@ -33,7 +31,14 @@ int main()
 
         /* clrs */
         else if (cmdInterpreter(input, "clrs", "W", "w")){
-            execvp("clear", args[0]);
+            int pid;
+            pid =fork();
+            if (pid ==0)
+            {
+                char* cmd[] = { "clear", NULL};
+                execvp(cmd[0], cmd);
+            }
+            
         }
 
         /* echo */

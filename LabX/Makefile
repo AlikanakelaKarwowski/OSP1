@@ -1,12 +1,12 @@
 .PHONY: all
 all : Shell
 
-Shell : myshell.o
-	g++ myshell.o -o myshell
+Shell : Shell.o
+	g++ shell.o -o Shell
 
-Shell.o : myshell.cpp
-	g++ -std=c++17 -c myshell.cpp
+Shell.o : Shell.cpp
+	g++ -std=c++17 -c Shell.cpp
 
 .PHONY: clean
 clean :
-	@rm -f myshell.o myshell
+	@rm -f Shell.o Shell

@@ -35,10 +35,13 @@ int main()
             pid =fork();
             if (pid ==0)
             {
+                int status;
                 char* cmd[] = { "clear", NULL};
                 execvp(cmd[0], cmd);
+
             }
-            
+            std::cout << "~(__^> ";
+
         }
 
         /* echo */
@@ -113,11 +116,27 @@ int main()
 
         /* remv */
         else if (cmdInterpreter(input, "remv", "D", "d")){
-            std::cout <<"remove ... ";
+            std::cout <<"removeing file(s)... " <<std::endl;
             std::stringstream ss;
             std::string argument;
             ss << input.substr(4);
             ss >> argument;
+            int pid;
+            pid =fork();
+            if (pid ==0)
+            {
+                int status;
+                char* cmd = "rm";
+                char* arg[3];
+                arg[0]= "rm";
+                char * argFile = new char[argument.size() + 1];
+                std::copy(argument.begin(), argument.end(), argFile);
+                argFile[argument.size()] = '\0'; 
+                arg[1] = argFile;
+                arg[2] = NULL;
+                execvp(cmd, arg);
+
+            }
             std::cout << argument << std::endl;
 
         }
@@ -150,7 +169,9 @@ int main()
 
         }
         else if (cmdInterpreter(input, "exit", "Q", "q"))
-            return 0;
+            {std::cout << "Exiting"<<std::endl;
+            sleepy(1);
+            return 0;}
 
         else if(cmdInterpreter(input, "list", "L", "l")){
             std::cout << "Listing content" <<std::endl;
@@ -164,7 +185,7 @@ int main()
 bool cmdInterpreter(std::string input, std::string check, std::string altU, std::string altL){
     if (input.substr(0,4) == check)
         return true;
-    if (input[0] == altU[0] || input[0] == altL[0])
+    if (input == altU || input == altL)
         return true;
     else
         return false;

@@ -17,7 +17,7 @@ int main()
 {
     int control = 0;
     std::string input;
-    char args[1][1];
+    char *args[1][1];
     args[0][0]='\0';
     while(true){
 

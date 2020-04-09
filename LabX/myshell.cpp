@@ -80,7 +80,7 @@ int main(int argc, char *argv[]) {
    }
 
    /* Shell termination */
-   printf("\n\n shell: Terminating successfully\n");
+   std::cout << "\n\n shell: Terminating successfully\n";
    return 0;
 }
 

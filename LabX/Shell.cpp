@@ -3,63 +3,66 @@
 #include <string>
 #include <sstream>
 #include <ctime>
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
 
 //command interpreter
-bool cmdInterpreter(std::string, std::string);
+bool cmdInterpreter(std::string, std::string, std::string, std::string);
 
 //portable sleep function for non-OS dependent sleep functionality
-void sleep(double);
+void sleepy(double);
 
 int main()
 {
     int control = 0;
     std::string input;
+    char args[1][1];
+    args[0][0]='\0';
     while(true){
 
         std::cout << "~(__^> ";
         std::getline(std::cin, input);
 
         /* boot */
-        if (cmdInterpreter(input, "boot")){
+        if (cmdInterpreter(input, "boot", " ", " ")){
             std::cout <<"Rebooting... " <<std::endl;
-            sleep(1);
+            sleepy(1);
             std::cout << "\033[2J\033[1;1H";
         }
 
         /* clrs */
-        else if (cmdInterpreter(input, "clrs")){
-            std::cout << "\033[2J\033[1;1H";
+        else if (cmdInterpreter(input, "clrs", "W", "w")){
+            execvp("clear", args[0]);
         }
 
         /* echo */
-        else if (cmdInterpreter(input, "echo")){
+        else if (cmdInterpreter(input, "echo", "E", "e")){
             std::string echo = input.substr(4);
             std::cout << echo << std::endl;
         }
 
         /* copy */
-        else if (cmdInterpreter(input, "copy")){
+        else if (cmdInterpreter(input, "copy" , "C", "c")){
             std::stringstream ss;
             std::string File1, File2;
             ss << input.substr(4);
-            ss >> File1 >> File2;
             std::cout << File2 << " has been copied to " << File1 << std::endl;
 
         }
 
         /* ddir */
-        else if (cmdInterpreter(input, "ddir" )){
+        else if (cmdInterpreter(input, "ddir", " ", " ")){
             std::cout <<"d directory ... ";
             std::stringstream ss;
             std::string argument;
             ss << input.substr(4);
             ss >> argument;
-            std::cout << argument << std::endl;
 
         }
 
         /* exec */
-        else if (cmdInterpreter(input, "exec" )){
+        else if (cmdInterpreter(input, "exec", "X", "x")){
             std::cout <<"execute ... ";
             std::stringstream ss;
             std::string argument;
@@ -70,7 +73,7 @@ int main()
         }
 
         /* help */
-        else if (cmdInterpreter(input, "help" )){
+        else if (cmdInterpreter(input, "help", "H", "h" )){
             std::cout <<"\tboot:\tReboots the shell."<<std::endl;
             std::cout <<"\tclrs:\tClears the screen of text."<<std::endl;
             std::cout <<"\techo:\tPrints out all text after the command."<<std::endl;
@@ -88,7 +91,7 @@ int main()
         }
 
         /* prnt */
-        else if (cmdInterpreter(input, "prnt")){
+        else if (cmdInterpreter(input, "prnt", "P", "p")){
             std::cout <<"Printing ... ";
             std::stringstream ss;
             std::string argument;
@@ -98,8 +101,13 @@ int main()
 
         }
 
+        else if (cmdInterpreter(input, "surf", "S", "s")){
+            std::cout <<"surfing web ... ";
+
+        }
+
         /* remv */
-        else if (cmdInterpreter(input, "remv")){
+        else if (cmdInterpreter(input, "remv", "D", "d")){
             std::cout <<"remove ... ";
             std::stringstream ss;
             std::string argument;
@@ -110,13 +118,13 @@ int main()
         }
 
         /* senv */
-        else if (cmdInterpreter(input, "senv")){
+        else if (cmdInterpreter(input, "senv", " ", " ")){
             std::cout <<"senv??? ... ";
             std::cout << std::endl;
         }
 
         /* show */
-        else if (cmdInterpreter(input, "show")){
+        else if (cmdInterpreter(input, "show", " ", " ")){
             std::cout <<"show ... ";
             std::stringstream ss;
             std::string argument;
@@ -127,7 +135,7 @@ int main()
         }
 
         /* twet */
-        else if (cmdInterpreter(input, "twet")){
+        else if (cmdInterpreter(input, "twet", " ", " ")){
             std::cout <<"twet ... ";
             std::stringstream ss;
             std::string argument;
@@ -136,22 +144,28 @@ int main()
             std::cout << argument << std::endl;
 
         }
-        else if (cmdInterpreter(input, "exit"))
+        else if (cmdInterpreter(input, "exit", "Q", "q"))
             return 0;
+
+        else if(cmdInterpreter(input, "list", "L", "l")){
+            std::cout << "Listing content" <<std::endl;
+        }
         else
             std::cout << "Command Not Found" << std::endl;
     }
 
 };
 
-bool cmdInterpreter(std::string input, std::string check){
+bool cmdInterpreter(std::string input, std::string check, std::string altU, std::string altL){
     if (input.substr(0,4) == check)
+        return true;
+    if (input[0] == altU[0] || input[0] == altL[0])
         return true;
     else
         return false;
 
 };
-void sleep(double seconds){
+void sleepy(double seconds){
     clock_t startClock = clock();
     double secondsAhead = seconds * CLOCKS_PER_SEC;
     while(clock() < startClock+secondsAhead);

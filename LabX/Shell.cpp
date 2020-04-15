@@ -96,10 +96,9 @@ int main()
             std::cout <<"execute ... ";
             std::stringstream ss;
             std::string argument;
-            ss << input.substr(4);
+            ss << input.substr(1);
             ss >> argument;
             std::cout << argument << std::endl;
-
         }
 
         /* help */
@@ -124,12 +123,28 @@ int main()
         /* prnt no single characters*/
         else if (cmdInterpreter(input, 'P'))
         {
-            std::cout <<"Printing ... ";
+            std::cout <<"Printing ... " << std::endl;
             std::stringstream ss;
             std::string argument;
-            ss << input.substr(4);
+            ss << input.substr(1);
             ss >> argument;
-            std::cout << argument << std::endl;
+
+            int pid;
+            pid = fork();
+            if(pid == 0){
+                char* cmd = "more";
+                char* arg[3];
+
+                arg[0] = cmd;
+
+                char * argF1 = new char[argument.size() + 1];
+                std::copy(argument.begin(), argument.end(), argF1);
+                argF1[argument.size()] = '\0';
+
+                arg[1] = argF1;
+                arg[2] = NULL;
+                execvp(cmd, arg);
+            }
 
         }
         /* surf the web*/ //works ?
@@ -145,6 +160,7 @@ int main()
               arg[1] = NULL;
               execvp(cmd, arg);
           }
+          std::cout << "Surfing Dude..." << std::endl;
 
         }
 
@@ -154,7 +170,7 @@ int main()
             std::cout <<"removing file ";
             std::stringstream ss;
             std::string buffer;
-            ss << input.substr(4);
+            ss << input.substr(2);
             ss >> buffer;
             int pid;
             pid =fork();
@@ -176,6 +192,8 @@ int main()
 
         }
 
+
+
         else if (cmdInterpreter(input, 'Q'))
         {
             std::cout << "Exiting"<<std::endl;
@@ -186,7 +204,26 @@ int main()
 
         else if(cmdInterpreter(input, 'L'))
         {
-            std::cout << "Listing content" <<std::endl;
+            int pid;
+            pid =fork();
+            if (pid ==0)
+            {
+                char* cmd = "pwd";
+                char* arg[2];
+                arg[0] = cmd;
+                arg[1] = NULL;
+                execvp(cmd, arg);
+            }
+            pid =fork();
+            if (pid ==0)
+            {
+                char* cmd = "ls";
+                char* arg[3];
+                arg[0] = cmd;
+                arg[1] = "-l";
+                arg[2] = NULL;
+                execvp(cmd, arg);
+            }
         }
         else
             std::cout << "Command Not Found" << std::endl;

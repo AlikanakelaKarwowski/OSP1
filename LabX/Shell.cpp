@@ -35,12 +35,13 @@ int main()
             pid =fork();
             if (pid ==0)
             {
-                int status;
+                int status =0;
                 char* cmd[] = { "clear", NULL};
                 execvp(cmd[0], cmd);
-
+                status =1;
+                std::cout << "~(__^> ";
             }
-            std::cout << "~(__^> ";
+
 
         }
 
@@ -110,13 +111,13 @@ int main()
         }
 
         else if (cmdInterpreter(input, "surf", "S", "s")){
-            std::cout <<"surfing web ... ";
+            std::cout <<"surfing web ... " <<std::endl;
 
         }
 
         /* remv */
         else if (cmdInterpreter(input, "remv", "D", "d")){
-            std::cout <<"removeing file(s)... " <<std::endl;
+            std::cout <<"removing file(s)... ";
             std::stringstream ss;
             std::string argument;
             ss << input.substr(4);
@@ -131,7 +132,7 @@ int main()
                 arg[0]= "rm";
                 char * argFile = new char[argument.size() + 1];
                 std::copy(argument.begin(), argument.end(), argFile);
-                argFile[argument.size()] = '\0'; 
+                argFile[argument.size()] = '\0';
                 arg[1] = argFile;
                 arg[2] = NULL;
                 execvp(cmd, arg);
@@ -171,6 +172,7 @@ int main()
         else if (cmdInterpreter(input, "exit", "Q", "q"))
             {std::cout << "Exiting"<<std::endl;
             sleepy(1);
+            std::cout << "\033[2J\033[1;1H";
             return 0;}
 
         else if(cmdInterpreter(input, "list", "L", "l")){

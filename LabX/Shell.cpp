@@ -8,70 +8,91 @@
 #include <stdlib.h>
 
 //command interpreter
-bool cmdInterpreter(std::string, std::string, std::string, std::string);
+bool cmdInterpreter(std::string, char);
 
 //portable sleep function for non-OS dependent sleep functionality
 void sleepy(double);
 
 int main()
 {
-    int control = 0;
     std::string input;
-    while(true){
-
+    while(true)
+    {
         std::cout << "~(__^> ";
         std::getline(std::cin, input);
 
-        /* boot */
-        if (cmdInterpreter(input, "boot", " ", " ")){
-            std::cout <<"Rebooting... " <<std::endl;
-            sleepy(1);
-            std::cout << "\033[2J\033[1;1H";
-        }
-
-        /* clrs */
-        else if (cmdInterpreter(input, "clrs", "W", "w")){
+        /* clrs */ //work
+        if (cmdInterpreter(input,'W'))
+        {
             int pid;
             pid =fork();
             if (pid ==0)
             {
-                int status =0;
                 char* cmd[] = { "clear", NULL};
                 execvp(cmd[0], cmd);
-                status =1;
-                std::cout << "~(__^> ";
+
             }
-
-
+            //std::cout << "~(__^> ";
         }
 
-        /* echo */
-        else if (cmdInterpreter(input, "echo", "E", "e")){
-            std::string echo = input.substr(4);
-            std::cout << echo << std::endl;
+        /* echo  no single characters*/ //works
+        else if (cmdInterpreter(input, 'E'))
+        {
+            std::string echo = input.substr(2);
+            int pid;
+            pid = fork();
+
+            if(pid ==0)
+            {
+                char* cmd = "echo";
+                char* arg[3];
+                arg[0]= cmd;
+
+                char * argEcho = new char[echo.size() + 1];
+                std::copy(echo.begin(), echo.end(), argEcho);
+                argEcho[echo.size()] = '\0';
+
+                arg[1] = argEcho;
+                arg[2] = NULL;
+                std::cout <<std::endl;
+
+                execvp(cmd, arg);
+            }
         }
 
-        /* copy */
-        else if (cmdInterpreter(input, "copy" , "C", "c")){
+        /* copy no single characters*/ // work
+        else if (cmdInterpreter(input, 'C'))
+        {
             std::stringstream ss;
             std::string File1, File2;
-            ss << input.substr(4);
+            ss << input.substr(1);
+            ss >> File1 >> File2;
+            int pid;
+            pid = fork();
+            if(pid == 0){
+                char* cmd = "cp";
+                char* arg[4];
+
+                arg[0] = cmd;
+
+                char * argF1 = new char[File1.size() + 1];
+                std::copy(File1.begin(), File1.end(), argF1);
+                argF1[File1.size()] = '\0';
+
+                char * argF2 = new char[File2.size() + 1];
+                std::copy(File2.begin(), File2.end(), argF2);
+                argF2[File2.size()] = '\0';
+
+                arg[1] = argF1;
+                arg[2] = argF2;
+                arg[3] = NULL;
+                execvp(cmd, arg);
+            }
             std::cout << File2 << " has been copied to " << File1 << std::endl;
-
         }
-
-        /* ddir */
-        else if (cmdInterpreter(input, "ddir", " ", " ")){
-            std::cout <<"d directory ... ";
-            std::stringstream ss;
-            std::string argument;
-            ss << input.substr(4);
-            ss >> argument;
-
-        }
-
-        /* exec */
-        else if (cmdInterpreter(input, "exec", "X", "x")){
+        /* exec no single characters*/
+        else if (cmdInterpreter(input, 'X'))
+        {
             std::cout <<"execute ... ";
             std::stringstream ss;
             std::string argument;
@@ -82,7 +103,8 @@ int main()
         }
 
         /* help */
-        else if (cmdInterpreter(input, "help", "H", "h" )){
+        else if (cmdInterpreter(input, 'H'))
+        {
             std::cout <<"\tboot:\tReboots the shell."<<std::endl;
             std::cout <<"\tclrs:\tClears the screen of text."<<std::endl;
             std::cout <<"\techo:\tPrints out all text after the command."<<std::endl;
@@ -99,8 +121,9 @@ int main()
 
         }
 
-        /* prnt */
-        else if (cmdInterpreter(input, "prnt", "P", "p")){
+        /* prnt no single characters*/
+        else if (cmdInterpreter(input, 'P'))
+        {
             std::cout <<"Printing ... ";
             std::stringstream ss;
             std::string argument;
@@ -109,19 +132,30 @@ int main()
             std::cout << argument << std::endl;
 
         }
-
-        else if (cmdInterpreter(input, "surf", "S", "s")){
-            std::cout <<"surfing web ... " <<std::endl;
+        /* surf the web*/ //works ?
+        else if (cmdInterpreter(input, 'S'))
+        {
+          int pid;
+          pid =fork();
+          if (pid ==0)
+          {
+              char* cmd = "firefox &";
+              char* arg[2];
+              arg[0] = cmd;
+              arg[1] = NULL;
+              execvp(cmd, arg);
+          }
 
         }
 
-        /* remv */
-        else if (cmdInterpreter(input, "remv", "D", "d")){
-            std::cout <<"removing file(s)... ";
+        /* remv  no single characters*/ //work
+        else if (cmdInterpreter(input, 'D'))
+        {
+            std::cout <<"removing file ";
             std::stringstream ss;
-            std::string argument;
+            std::string buffer;
             ss << input.substr(4);
-            ss >> argument;
+            ss >> buffer;
             int pid;
             pid =fork();
             if (pid ==0)
@@ -130,52 +164,28 @@ int main()
                 char* cmd = "rm";
                 char* arg[3];
                 arg[0]= "rm";
-                char * argFile = new char[argument.size() + 1];
-                std::copy(argument.begin(), argument.end(), argFile);
-                argFile[argument.size()] = '\0';
+                char * argFile = new char[buffer.size() + 1];
+                std::copy(buffer.begin(), buffer.end(), argFile);
+                argFile[buffer.size()] = '\0';
                 arg[1] = argFile;
                 arg[2] = NULL;
                 execvp(cmd, arg);
 
             }
-            std::cout << argument << std::endl;
+            std::cout << buffer << std::endl;
 
         }
 
-        /* senv */
-        else if (cmdInterpreter(input, "senv", " ", " ")){
-            std::cout <<"senv??? ... ";
-            std::cout << std::endl;
-        }
-
-        /* show */
-        else if (cmdInterpreter(input, "show", " ", " ")){
-            std::cout <<"show ... ";
-            std::stringstream ss;
-            std::string argument;
-            ss << input.substr(4);
-            ss >> argument;
-            std::cout << argument << std::endl;
-
-        }
-
-        /* twet */
-        else if (cmdInterpreter(input, "twet", " ", " ")){
-            std::cout <<"twet ... ";
-            std::stringstream ss;
-            std::string argument;
-            ss << input.substr(4);
-            ss >> argument;
-            std::cout << argument << std::endl;
-
-        }
-        else if (cmdInterpreter(input, "exit", "Q", "q"))
-            {std::cout << "Exiting"<<std::endl;
+        else if (cmdInterpreter(input, 'Q'))
+        {
+            std::cout << "Exiting"<<std::endl;
             sleepy(1);
             std::cout << "\033[2J\033[1;1H";
-            return 0;}
+            return 0;
+        }
 
-        else if(cmdInterpreter(input, "list", "L", "l")){
+        else if(cmdInterpreter(input, 'L'))
+        {
             std::cout << "Listing content" <<std::endl;
         }
         else
@@ -184,14 +194,15 @@ int main()
 
 };
 
-bool cmdInterpreter(std::string input, std::string check, std::string altU, std::string altL){
-    if (input.substr(0,4) == check)
-        return true;
-    if (input == altU || input == altL)
+
+bool cmdInterpreter(std::string input, char cmd){
+
+    char tmp = input[0];
+
+    if (tmp == cmd)
         return true;
     else
         return false;
-
 };
 void sleepy(double seconds){
     clock_t startClock = clock();

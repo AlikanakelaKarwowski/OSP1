@@ -104,19 +104,14 @@ int main()
         /* help */
         else if (cmdInterpreter(input, 'H'))
         {
-            std::cout <<"\tboot:\tReboots the shell."<<std::endl;
-            std::cout <<"\tclrs:\tClears the screen of text."<<std::endl;
-            std::cout <<"\techo:\tPrints out all text after the command."<<std::endl;
-            std::cout <<"\tcopy:\tTakes 2 arguments as files, and copys file 2 into file 1."<<std::endl;
-            std::cout <<"\tddir:\t*Insert Help Text Here*."<<std::endl;
-            std::cout <<"\texec:\tTakes 1 argument as a file and runs the file."<<std::endl;
-            std::cout <<"\thelp:\tDisplays This Message."<<std::endl;
-            std::cout <<"\tprnt:\tTakes 1 argument as a file and prints the content to the shell."<<std::endl;
-            std::cout <<"\tremv:\tTakes 1 argument as a file and deletes the file."<<std::endl;
-            std::cout <<"\tsenv:\t*Insert Help Message Here*."<<std::endl;
-            std::cout <<"\tshow:\tTakes 1 argument as a file and displays the file."<<std::endl;
-            std::cout <<"\ttwet:\t*Insert Help Message Here*."<<std::endl;
-            std::cout <<"\texit:\tExit the shell and return to console."<<std::endl;
+            std::cout <<"\tW:\tClears the screen of text."<<std::endl;
+            std::cout <<"\tE:\tPrints out all text after the command."<<std::endl;
+            std::cout <<"\tC:\tTakes 2 arguments as files, and copys file 2 into file 1."<<std::endl;
+            std::cout <<"\tX:\tTakes 1 argument as a file and runs the file."<<std::endl;
+            std::cout <<"\tH:\tDisplays This Message."<<std::endl;
+            std::cout <<"\tP:\tTakes 1 argument as a file and prints the content to the shell."<<std::endl;
+            std::cout <<"\tD:\tTakes 1 argument as a file and deletes the file."<<std::endl;
+            std::cout <<"\tQxit:\tExit the shell and return to console."<<std::endl;
 
         }
 

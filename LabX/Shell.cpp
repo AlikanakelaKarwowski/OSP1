@@ -88,7 +88,7 @@ int main()
                 arg[3] = NULL;
                 execvp(cmd, arg);
             }
-            std::cout << File2 << " has been copied to " << File1 << std::endl;
+            std::cout << File1 << " has been copied to " << File2<< std::endl;
         }
         /* exec no single characters*/
         else if (cmdInterpreter(input, 'X'))
@@ -107,7 +107,7 @@ int main()
                 char* cmd = "exec";
                 char* arg[2];
 
-
+./
                 char * argExec = new char[argument.size() + 1];
                 std::copy(argument.begin(), argument.end(), argExec);
                 argExec[argument.size()] = '\0';
@@ -163,17 +163,17 @@ int main()
         /* surf the web*/ //works ?
         else if (cmdInterpreter(input, 'S'))
         {
-          int pid;
-          pid =fork();
-          if (pid ==0)
-          {
-              char* cmd = "firefox &";
-              char* arg[2];
-              arg[0] = cmd;
-              arg[1] = NULL;
-              execvp(cmd, arg);
-          }
-          std::cout << "Surfing Dude..." << std::endl;
+            int pid;
+            pid =fork();
+            if (pid ==0)
+            {
+                char* cmd = "firefox &";
+                char* arg[2];
+                arg[0] = cmd;
+                arg[1] = NULL;
+                execvp(cmd, arg);
+            }
+            std::cout << "Surfing Dude..." << std::endl;
 
         }
 

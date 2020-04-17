@@ -98,7 +98,25 @@ int main()
             std::string argument;
             ss << input.substr(1);
             ss >> argument;
-            std::cout << argument << std::endl;
+
+            int pid;
+            pid = fork();
+
+            if(pid ==0)
+            {
+                char* cmd = "exec";
+                char* arg[2];
+
+
+                char * argExec = new char[argument.size() + 1];
+                std::copy(argument.begin(), argument.end(), argExec);
+                argExec[argument.size()] = '\0';
+                arg[0]= argExec;
+                arg[1] = NULL;
+                std::cout <<std::endl;
+
+                execvp(cmd, arg);
+            }
         }
 
         /* help */
@@ -216,6 +234,31 @@ int main()
                 char* arg[3];
                 arg[0] = cmd;
                 arg[1] = "-l";
+                arg[2] = NULL;
+                execvp(cmd, arg);
+            }
+        }
+        else if(cmdInterpreter(input, 'M'))
+        {
+            std::cout <<"Making... " << std::endl;
+            std::stringstream ss;
+            std::string argument;
+            ss << input.substr(1);
+            ss >> argument;
+
+            int pid;
+            pid = fork();
+            if(pid == 0){
+                char* cmd = "nano";
+                char* arg[3];
+
+                arg[0] = cmd;
+
+                char * argF1 = new char[argument.size() + 1];
+                std::copy(argument.begin(), argument.end(), argF1);
+                argF1[argument.size()] = '\0';
+
+                arg[1] = argF1;
                 arg[2] = NULL;
                 execvp(cmd, arg);
             }

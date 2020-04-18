@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <sys/wait.h>
 
 //command interpreter
 bool cmdInterpreter(std::string, char);
@@ -15,9 +16,12 @@ void sleepy(double);
 
 int main()
 {
+    int pid;
+    int status;
     std::string input;
     while(true)
     {
+        pid =0;
         std::cout << "~(__^> ";
         std::getline(std::cin, input);
 
@@ -32,7 +36,7 @@ int main()
                 execvp(cmd[0], cmd);
 
             }
-            //std::cout << "~(__^> ";
+        waitpid(pid, &status, 0);
         }
 
         /* echo  no single characters*/ //works
@@ -54,10 +58,10 @@ int main()
 
                 arg[1] = argEcho;
                 arg[2] = NULL;
-                std::cout <<std::endl;
 
                 execvp(cmd, arg);
             }
+            waitpid(pid, &status, 0);
         }
 
         /* copy no single characters*/ // work
@@ -88,12 +92,12 @@ int main()
                 arg[3] = NULL;
                 execvp(cmd, arg);
             }
+            waitpid(pid, &status, 0);
             std::cout << File1 << " has been copied to " << File2<< std::endl;
         }
         /* exec no single characters*/
         else if (cmdInterpreter(input, 'X'))
         {
-            std::cout <<"execute ... ";
             std::stringstream ss;
             std::string argument;
             ss << input.substr(1);
@@ -104,10 +108,8 @@ int main()
 
             if(pid ==0)
             {
-                char* cmd = "exec";
-                char* arg[2];
 
-./
+                char* arg[2];
                 char * argExec = new char[argument.size() + 1];
                 std::copy(argument.begin(), argument.end(), argExec);
                 argExec[argument.size()] = '\0';
@@ -115,8 +117,9 @@ int main()
                 arg[1] = NULL;
                 std::cout <<std::endl;
 
-                execvp(cmd, arg);
+                execvp(arg[0], arg);
             }
+            waitpid(pid, &status, 0);
         }
 
         /* help */
@@ -159,6 +162,7 @@ int main()
                 execvp(cmd, arg);
             }
 
+            waitpid(pid, &status, 0);
         }
         /* surf the web*/ //works ?
         else if (cmdInterpreter(input, 'S'))
@@ -173,6 +177,7 @@ int main()
                 arg[1] = NULL;
                 execvp(cmd, arg);
             }
+            waitpid(pid, &status, 0);
             std::cout << "Surfing Dude..." << std::endl;
 
         }
@@ -202,11 +207,9 @@ int main()
 
             }
             std::cout << buffer << std::endl;
+            waitpid(pid, &status, 0);
 
         }
-
-
-
         else if (cmdInterpreter(input, 'Q'))
         {
             std::cout << "Exiting"<<std::endl;
@@ -237,10 +240,11 @@ int main()
                 arg[2] = NULL;
                 execvp(cmd, arg);
             }
+            waitpid(pid, &status, 0);
         }
         else if(cmdInterpreter(input, 'M'))
         {
-            std::cout <<"Making... " << std::endl;
+
             std::stringstream ss;
             std::string argument;
             ss << input.substr(1);
@@ -262,6 +266,7 @@ int main()
                 arg[2] = NULL;
                 execvp(cmd, arg);
             }
+            waitpid(pid, &status, 0);
         }
         else
             std::cout << "Command Not Found" << std::endl;

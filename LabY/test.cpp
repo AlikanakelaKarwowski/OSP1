@@ -3,8 +3,10 @@
 #include <random>
 #include <semaphore.h>
 #include <pthread.h>
+#include <time.h>
+#include <iostream>
 
-int sleep_up_to(int ms);
+void SleepTo(int SleepLength);
 void agent1();
 void agent2();
 void agent3();
@@ -29,19 +31,21 @@ sem_t paperSem;
 sem_t matchSem;
 sem_t mutex;
 
-int sleep_up_to(int ms)
+void SleepTo(int SleepLength)
 {
-    std::random_device rd;
-    std::mt19937 eng(rd());
-    std::uniform_int_distribution<> distr(0, ms);
-    std::this_thread::sleep_for(std::chrono::milliseconds(distr(eng)));
+    srand(time(0));
+    int ms = rand()%SleepLength +1;
+    clock_t startClock = clock();
+    double secondsAhead = ms * CLOCKS_PER_SEC;
+    while(clock() < startClock+secondsAhead);
+    return;
 }
 
 void* agent1(void* args)
 {
     for (int i = 0; i < 6; i++)
     {
-        sleep_up_to(200);
+        SleepTo(200);
         sem_wait(&agentSem);
         sem_post(&paper);
         sem_post(&tobacco);
@@ -52,7 +56,7 @@ void* agent2(void* args)
 {
     for (int i = 0; i < 6; i++)
     {
-        sleep_up_to(200);
+        SleepTo(200);
         sem_wait(&agentSem);
         sem_post(&tobacco);
         sem_post(&match);
@@ -63,7 +67,7 @@ void* agent3(void* args)
 {
     for (int i = 0; i < 6; i++)
     {
-        sleep_up_to(200);
+        SleepTo(200);
         sem_wait(&agentSem);
         sem_post(&paper);
         sem_post(&match);
@@ -150,9 +154,9 @@ void* smoker_with_tobacco(void* args)
     for (int i = 0; i < 3; i++)
     {
         sem_wait(&tobaccoSem);
-        sleep_up_to(50);
+        SleepTo(50);
         sem_post(&agentSem);
-        sleep_up_to(50);
+        SleepTo(50);
     }
 }
 
@@ -161,9 +165,9 @@ void* smoker_with_paper(void* args)
     for (int i = 0; i < 3; i++)
     {
         sem_wait(&paperSem);
-        sleep_up_to(50);
+        SleepTo(50);
         sem_post(&agentSem);
-        sleep_up_to(50);
+        SleepTo(50);
     }
 }
 
@@ -172,9 +176,9 @@ void* smoker_with_matches(void* args)
     for (int i = 0; i < 3; i++)
     {
         sem_wait(&matchSem);
-        sleep_up_to(50);
+        SleepTo(50);
         sem_post(&agentSem);
-        sleep_up_to(50);
+        SleepTo(50);
     }
 }
 

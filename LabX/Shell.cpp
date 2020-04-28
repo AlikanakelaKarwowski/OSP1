@@ -25,7 +25,7 @@ int main()
         std::cout << "~(__^> ";
         std::getline(std::cin, input);
 
-        /* clrs */ //work
+        //Clear screen command
         if (cmdInterpreter(input,'W'))
         {
             int pid;
@@ -37,9 +37,10 @@ int main()
 
             }
         waitpid(pid, &status, 0);
+
         }
 
-        /* echo  no single characters*/ //works
+        // echo command
         else if (cmdInterpreter(input, 'E'))
         {
             std::string echo = input.substr(2);
@@ -64,7 +65,7 @@ int main()
             waitpid(pid, &status, 0);
         }
 
-        /* copy no single characters*/ // work
+        // Copy file command
         else if (cmdInterpreter(input, 'C'))
         {
             std::stringstream ss;
@@ -95,7 +96,7 @@ int main()
             waitpid(pid, &status, 0);
             std::cout << File1 << " has been copied to " << File2<< std::endl;
         }
-        /* exec no single characters*/
+        // execute command
         else if (cmdInterpreter(input, 'X'))
         {
             std::stringstream ss;
@@ -122,24 +123,26 @@ int main()
             waitpid(pid, &status, 0);
         }
 
-        /* help */
+        // help command
         else if (cmdInterpreter(input, 'H'))
         {
             std::cout <<"\tW:\tClears the screen of text."<<std::endl;
             std::cout <<"\tE:\tPrints out all text after the command."<<std::endl;
-            std::cout <<"\tC:\tTakes 2 arguments as files, and copys file 2 into file 1."<<std::endl;
-            std::cout <<"\tX:\tTakes 1 argument as a file and runs the file."<<std::endl;
+            std::cout <<"\tC:\tTakes 2 arguments as files, and copys file 1 into file 2."<<std::endl;
+            std::cout <<"\tX:\tTakes 1 argument as a program and runs the program."<<std::endl;
             std::cout <<"\tH:\tDisplays This Message."<<std::endl;
             std::cout <<"\tP:\tTakes 1 argument as a file and prints the content to the shell."<<std::endl;
             std::cout <<"\tD:\tTakes 1 argument as a file and deletes the file."<<std::endl;
             std::cout <<"\tQ:\tExit the shell and return to console."<<std::endl;
+            std::cout <<"\tS:\tSurf the web, but not really."<<std::endl;
+            std::cout <<"\tL:\tShow current working directory and files."<<std::endl;
+            std::cout <<"\tM:\tMake a new file using nano."<<std::endl;
 
         }
 
-        /* prnt no single characters*/
+        // print command
         else if (cmdInterpreter(input, 'P'))
         {
-            std::cout <<"Printing ... " << std::endl;
             std::stringstream ss;
             std::string argument;
             ss << input.substr(1);
@@ -161,14 +164,15 @@ int main()
                 arg[2] = NULL;
                 execvp(cmd, arg);
             }
-
             waitpid(pid, &status, 0);
         }
+
         /* surf the web*/ //works ?
         else if (cmdInterpreter(input, 'S'))
         {
             int pid;
             pid =fork();
+            //firefox & does not work on my home system. use at your own risk
             if (pid ==0)
             {
                 char* cmd = "firefox &";
@@ -182,10 +186,9 @@ int main()
 
         }
 
-        /* remv  no single characters*/ //work
+        // delete
         else if (cmdInterpreter(input, 'D'))
         {
-            std::cout <<"removing file ";
             std::stringstream ss;
             std::string buffer;
             ss << input.substr(2);
@@ -206,18 +209,18 @@ int main()
                 execvp(cmd, arg);
 
             }
-            std::cout << buffer << std::endl;
             waitpid(pid, &status, 0);
 
         }
+        // exit command
         else if (cmdInterpreter(input, 'Q'))
         {
             std::cout << "Exiting"<<std::endl;
             sleepy(1);
             std::cout << "\033[2J\033[1;1H";
-            return 0;
+            exit(1);
         }
-
+        // list directory command
         else if(cmdInterpreter(input, 'L'))
         {
             int pid;
@@ -242,6 +245,7 @@ int main()
             }
             waitpid(pid, &status, 0);
         }
+        // make command
         else if(cmdInterpreter(input, 'M'))
         {
 

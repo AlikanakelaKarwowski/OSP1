@@ -132,12 +132,13 @@ int main()
             std::cout <<"\tX:\tTakes 1 argument as a program and runs the program."<<std::endl;
             std::cout <<"\tH:\tDisplays This Message."<<std::endl;
             std::cout <<"\tP:\tTakes 1 argument as a file and prints the content to the shell."<<std::endl;
+            std::cout <<"\tS:\tTakes 1 argument and surfs the web." << std::endl;
             std::cout <<"\tD:\tTakes 1 argument as a file and deletes the file."<<std::endl;
             std::cout <<"\tQ:\tExit the shell and return to console."<<std::endl;
+
             std::cout <<"\tS:\tSurf the web, but not really."<<std::endl;
             std::cout <<"\tL:\tShow current working directory and files."<<std::endl;
             std::cout <<"\tM:\tMake a new file using nano."<<std::endl;
-
         }
 
         // print command

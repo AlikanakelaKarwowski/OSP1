@@ -232,6 +232,7 @@ void* smokerMatches(void* args)
 
 int main()
 {
+    
     // agent semaphores
     sem_init(&agentSem, 0, 1);
     sem_init(&tobacco, 0, 0);

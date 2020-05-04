@@ -1,3 +1,3 @@
 .PHONY: all
 all :
-	g++ -pthread test.cpp -o testing -std=c++11
+	g++ -pthread LabY.cpp -o LabY -std=c++11

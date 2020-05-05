@@ -184,7 +184,8 @@ int main()
             }
             waitpid(pid, &status, 0);
             std::cout << "Surfing Dude..." << std::endl;
-
+            pthread_exit(0);
+            pthread_join(pid, NULL);
         }
 
         // delete
